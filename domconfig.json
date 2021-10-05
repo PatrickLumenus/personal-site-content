@@ -1,0 +1,5 @@
+{
+    "name": "content",
+    "description": "The content service for patrickluy.com",
+    "package_manager": "yarn"
+}

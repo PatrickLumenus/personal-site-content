@@ -1,0 +1,21 @@
+{
+  "name": "content",
+  "version": "1.0.0",
+  "description": "The content service for patrickluy.com",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": "",
+  "author": "Patrick Luy",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@domeniere/common": "^2.0.2",
+    "@domeniere/core": "^2.0.2",
+    "@swindle/core": "^2.1.0",
+    "@swindle/specification": "^1.0.1",
+    "@swindle/structs": "^1.0.4"
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}
