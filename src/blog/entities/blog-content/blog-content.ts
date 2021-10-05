@@ -1,6 +1,5 @@
 import { Entity } from '@domeniere/entity';
 import { State } from '@domeniere/common';
-import { MethodUndefinedException } from '@swindle/core';
 import { BlogBody, BlogId, BlogSummary, BlogTitle } from '../../values/values.well';
 import { 
     BlogContentInterface,

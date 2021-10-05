@@ -12,6 +12,12 @@ import { BlogIdInterface } from './blog-id.interface';
 
     private readonly _value: string;
 
+    /**
+     * creates a BlogId value
+     * @param value the value of the id.
+     * @throws BlogIdException when the blog id is invalid.
+     */
+
     constructor(value: string) {
         super();
 

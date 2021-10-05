@@ -12,6 +12,11 @@ import { BlogTitleInterface } from './blog-title.interface';
 
     private readonly _title: string;
 
+    /**
+     * creates an instance of BlogTitle
+     * @param value the value
+     * @throws BlogTitleEception when the blog title value is not valid.
+     */
     constructor(value: string) {
         super();
 

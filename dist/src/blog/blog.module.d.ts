@@ -1,18 +1,10 @@
 import { Module } from '@domeniere/module';
-
-
 export default class BlogModule extends Module {
-    constructor() {
-        super('blog');
-    }
-
-    protected createdBindings() {
-        // register module bindings here.
-    }
+    constructor();
+    protected createdBindings(): void;
 }
-
-// module well exports go here.
 export * from "./values/values.well";
 export * from "./exceptions/exceptions.well";
 export * from "./entities/entities.well";
 export * from "./aggregates/aggregates.well";
+//# sourceMappingURL=blog.module.d.ts.map
