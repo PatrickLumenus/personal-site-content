@@ -10,9 +10,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// exceptions well
-__exportStar(require("./blog-id.exception"), exports);
-__exportStar(require("./blog-title.exception"), exports);
-__exportStar(require("./blog-statics.exception"), exports);
-__exportStar(require("./repositories/blog-repository.exception"), exports);
-__exportStar(require("./repositories/blog-post-not-found.exception"), exports);
+// services well
+__exportStar(require("./get-latest-blog-posts.query"), exports);
+__exportStar(require("./get-blog-post-by-id.query"), exports);
+__exportStar(require("./search-blog-posts.query"), exports);

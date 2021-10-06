@@ -11,12 +11,26 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const module_1 = require("@domeniere/module");
+const repositories_well_1 = require("./repositories/repositories.well");
+const services_well_1 = require("./services/services.well");
+/**
+ * The Blog module
+ */
 class BlogModule extends module_1.Module {
     constructor() {
         super('blog');
     }
     createdBindings() {
-        // register module bindings here.
+        this.bindRepository(repositories_well_1.BlogsRepository);
+        this.bindService(services_well_1.GetLatestBlogPostsQuery, (module) => {
+            return new services_well_1.GetLatestBlogPostsQuery(module.get(repositories_well_1.BlogsRepository));
+        });
+        this.bindService(services_well_1.GetBlogPostByIdQuery, (module) => {
+            return new services_well_1.GetBlogPostByIdQuery(module.get(repositories_well_1.BlogsRepository));
+        });
+        this.bindService(services_well_1.SearchBlogPostsQuery, (module) => {
+            return new services_well_1.SearchBlogPostsQuery(module.get(repositories_well_1.BlogsRepository));
+        });
     }
 }
 exports.default = BlogModule;
@@ -25,3 +39,5 @@ __exportStar(require("./values/values.well"), exports);
 __exportStar(require("./exceptions/exceptions.well"), exports);
 __exportStar(require("./entities/entities.well"), exports);
 __exportStar(require("./aggregates/aggregates.well"), exports);
+__exportStar(require("./repositories/repositories.well"), exports);
+__exportStar(require("./services/services.well"), exports);

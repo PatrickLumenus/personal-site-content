@@ -21,7 +21,8 @@ export class BlogPost extends TimestampedAggregate implements BlogPostInterface 
     @State()
     private _statistics: BlogStatistics;
 
-    constructor(root: BlogContent,
+    constructor(
+        root: BlogContent,
         statistics: BlogStatistics = new BlogStatistics(),
         version: number|undefined = 1.0, 
         createdOn: DateTime = DateTime.Now(), 
