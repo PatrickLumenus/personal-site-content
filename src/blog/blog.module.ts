@@ -1,4 +1,5 @@
 import { Module } from '@domeniere/module';
+import { BlogDataFactory } from './factories/factories.well';
 import { BlogsRepository } from './repositories/repositories.well';
 import { GetBlogPostByIdQuery, GetLatestBlogPostsQuery, SearchBlogPostsQuery } from './services/services.well';
 
@@ -12,6 +13,7 @@ export default class BlogModule extends Module {
     }
 
     protected createdBindings() {
+        this.bindFactory(BlogDataFactory, (_) => new BlogDataFactory());
         this.bindRepository(BlogsRepository);
         this.bindService(GetLatestBlogPostsQuery, (module) => {
             return new GetLatestBlogPostsQuery(module.get(BlogsRepository));
@@ -32,3 +34,5 @@ export * from "./entities/entities.well";
 export * from "./aggregates/aggregates.well";
 export * from "./repositories/repositories.well";
 export * from "./services/services.well";
+export * from "./data/data.well";
+export * from "./factories/factories.well";

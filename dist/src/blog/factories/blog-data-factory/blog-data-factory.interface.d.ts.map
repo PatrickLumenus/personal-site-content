@@ -1,0 +1,1 @@
+{"version":3,"file":"blog-data-factory.interface.d.ts","sourceRoot":"","sources":["../../../../../src/blog/factories/blog-data-factory/blog-data-factory.interface.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,QAAQ,EAAE,MAAM,kCAAkC,CAAC;AAC5D,OAAO,EAAE,YAAY,EAAE,MAAM,sBAAsB,CAAC;AAGpD,MAAM,WAAW,wBAAwB;IAErC;;;;;OAKG;IAEH,gBAAgB,CAAC,MAAM,EAAE,QAAQ,GAAG,YAAY,CAAC;CACpD"}
