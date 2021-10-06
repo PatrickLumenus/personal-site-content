@@ -62,11 +62,8 @@ export class ContentApi extends Api {
         const results = await this.domain.module('blog')
             .get(GetLatestBlogPostsQuery)
             .execute(count, start);
-        return results.map(post => {
-            return this.domain.module('blog')
-                .get(BlogDataFactory)
-                .createFromObject(post);
-        });
+        const factory = this.domain.module('blog').get(BlogDataFactory);
+        return results.map(post => factory.createFromObject(post));
     }
 
     /**
