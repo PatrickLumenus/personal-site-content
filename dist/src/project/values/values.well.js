@@ -21,3 +21,5 @@ __exportStar(require("./project-website/project-website.interface"), exports);
 __exportStar(require("./project-website/project-website"), exports);
 __exportStar(require("./project-repository/project-repository.interface"), exports);
 __exportStar(require("./project-repository/project-repository"), exports);
+__exportStar(require("./project-statistics/project-statistics.interface"), exports);
+__exportStar(require("./project-statistics/project-statistics"), exports);
