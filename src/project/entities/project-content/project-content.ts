@@ -1,6 +1,5 @@
 import { State } from '@domeniere/common';
 import { Entity } from '@domeniere/entity';
-import { MethodUndefinedException } from '@swindle/core';
 import { 
     ProjectDescription, 
     ProjectId, 

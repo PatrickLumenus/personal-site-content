@@ -15,3 +15,4 @@ export default class ProjectModule extends Module {
 export * from "./values/values.well";
 export * from "./exceptions/exceptions.well";
 export * from "./entities/entities.well";
+export * from "./aggregates/aggregates.well";
