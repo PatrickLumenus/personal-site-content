@@ -17,3 +17,7 @@ __exportStar(require("./project-title/project-title.interface"), exports);
 __exportStar(require("./project-title/project-title"), exports);
 __exportStar(require("./project-description/project-description.interface"), exports);
 __exportStar(require("./project-description/project-description"), exports);
+__exportStar(require("./project-website/project-website.interface"), exports);
+__exportStar(require("./project-website/project-website"), exports);
+__exportStar(require("./project-repository/project-repository.interface"), exports);
+__exportStar(require("./project-repository/project-repository"), exports);
