@@ -61,11 +61,8 @@ class ContentApi extends core_1.Api {
         const results = await this.domain.module('blog')
             .get(blog_module_1.GetLatestBlogPostsQuery)
             .execute(count, start);
-        return results.map(post => {
-            return this.domain.module('blog')
-                .get(blog_module_1.BlogDataFactory)
-                .createFromObject(post);
-        });
+        const factory = this.domain.module('blog').get(blog_module_1.BlogDataFactory);
+        return results.map(post => factory.createFromObject(post));
     }
     /**
      * searchBlogs()

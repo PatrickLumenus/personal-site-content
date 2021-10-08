@@ -12,3 +12,5 @@ export default class ProjectModule extends Module {
 }
 
 // module well exports go here.
+export * from "./values/values.well";
+export * from "./exceptions/exceptions.well";

@@ -10,8 +10,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// The index file
-__exportStar(require("./src/content.api"), exports);
-__exportStar(require("./src/content.eventstore"), exports);
-__exportStar(require("./src/blog/blog.module"), exports);
-__exportStar(require("./src/project/project.module"), exports);
+// exceptions well
+__exportStar(require("./project-id.exception"), exports);
+__exportStar(require("./project-title.exception"), exports);
+__exportStar(require("./project-description.exception"), exports);
