@@ -23,6 +23,7 @@ exports.ContentApi = void 0;
 const core_1 = require("@domeniere/core");
 const blog_module_1 = __importStar(require("./blog/blog.module"));
 const project_module_1 = __importStar(require("./project/project.module"));
+const get_projects_by_technology_query_1 = require("./project/services/get-projects-by-technology.query");
 /**
  * ContentApi
  *
@@ -73,6 +74,54 @@ class ContentApi extends core_1.Api {
             .execute(count, start);
         const factory = this.domain.module('blog').get(blog_module_1.BlogDataFactory);
         return results.map(post => factory.createFromObject(post));
+    }
+    /**
+     * getLatestProjects()
+     *
+     * gets the latest projects
+     * @param count the number of projects to get.
+     * @returns the latest projects.
+     * @throws ProjectsRepositoryException when there is a problem with the repository.
+     */
+    async getLatestProjects(count = 3) {
+        const projects = await this.domain.module('project')
+            .get(project_module_1.GetLatestProjectsQuery)
+            .execute(count);
+        const factory = this.domain.module('project').get(project_module_1.ProjectDataFactory);
+        return projects.map(project => factory.createFromObject(project));
+    }
+    /**
+     * getProjectById()
+     *
+     * gets a project by its id.
+     * @param id the id of the project to get.
+     * @returns The project associated with the ID.
+     * @throws ProjectNotFoundException when the project is not found.
+     * @throws ProjectsRepositoryException when the repository encounters a problem.
+     */
+    async getProjectById(id) {
+        const project = await this.domain.module('project')
+            .get(project_module_1.GetProjectByIdQuery)
+            .execute(new project_module_1.ProjectId(id.id));
+        return this.domain.module('project')
+            .get(project_module_1.ProjectDataFactory)
+            .createFromObject(project);
+    }
+    /**
+     * getProjectsByTechnology()
+     *
+     * gets projects associated with the specified technology.
+     * @param technology the technology to searc for
+     * @returns the projects associated with the technology.
+     * @throws ProjectNotFoundException when there is no projects found for that technology.
+     * @throws ProjectsRepositoryException when there is a problem with the repository.
+     */
+    async getProjectsByTechnology(technology) {
+        const projects = await this.domain.module('project')
+            .get(get_projects_by_technology_query_1.GetProjectsByTechnologyQuery)
+            .execute(new project_module_1.Technology(technology.technology));
+        const factory = this.domain.module('project').get(project_module_1.ProjectDataFactory);
+        return projects.map(project => factory.createFromObject(project));
     }
     /**
      * searchBlogs()

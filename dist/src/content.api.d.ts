@@ -1,7 +1,8 @@
 import { Api } from '@domeniere/core';
 import { BlogIdData, BlogPostData, BlogsRepository, SearchTextData } from './blog/blog.module';
 import { ContentEventStore } from './content.eventstore';
-import { ProjectsRepository } from './project/project.module';
+import { ProjectIdData } from './project/data/project-id.data';
+import { ProjectData, ProjectsRepository, TechnologyData } from './project/project.module';
 /**
  * ContentApi
  *
@@ -30,6 +31,35 @@ export declare class ContentApi extends Api {
      * @throws BlogRepositoryException when there is a problem with the repository.
      */
     getLatestBlogs(count?: number, start?: number): Promise<BlogPostData[]>;
+    /**
+     * getLatestProjects()
+     *
+     * gets the latest projects
+     * @param count the number of projects to get.
+     * @returns the latest projects.
+     * @throws ProjectsRepositoryException when there is a problem with the repository.
+     */
+    getLatestProjects(count?: number): Promise<ProjectData[]>;
+    /**
+     * getProjectById()
+     *
+     * gets a project by its id.
+     * @param id the id of the project to get.
+     * @returns The project associated with the ID.
+     * @throws ProjectNotFoundException when the project is not found.
+     * @throws ProjectsRepositoryException when the repository encounters a problem.
+     */
+    getProjectById(id: ProjectIdData): Promise<ProjectData>;
+    /**
+     * getProjectsByTechnology()
+     *
+     * gets projects associated with the specified technology.
+     * @param technology the technology to searc for
+     * @returns the projects associated with the technology.
+     * @throws ProjectNotFoundException when there is no projects found for that technology.
+     * @throws ProjectsRepositoryException when there is a problem with the repository.
+     */
+    getProjectsByTechnology(technology: TechnologyData): Promise<ProjectData[]>;
     /**
      * searchBlogs()
      *

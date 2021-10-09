@@ -11,7 +11,18 @@ import BlogModule, {
     SearchTextData
 } from './blog/blog.module';
 import { ContentEventStore } from './content.eventstore';
-import ProjectModule, { ProjectData, ProjectsRepository } from './project/project.module';
+import { ProjectIdData } from './project/data/project-id.data';
+import ProjectModule, { 
+    GetLatestProjectsQuery, 
+    GetProjectByIdQuery, 
+    ProjectData, 
+    ProjectDataFactory, 
+    ProjectId, 
+    ProjectsRepository, 
+    Technology, 
+    TechnologyData
+} from './project/project.module';
+import { GetProjectsByTechnologyQuery } from './project/services/get-projects-by-technology.query';
 
 /**
  * ContentApi
@@ -78,8 +89,58 @@ export class ContentApi extends Api {
         return results.map(post => factory.createFromObject(post));
     }
 
+    /**
+     * getLatestProjects()
+     * 
+     * gets the latest projects
+     * @param count the number of projects to get.
+     * @returns the latest projects.
+     * @throws ProjectsRepositoryException when there is a problem with the repository.
+     */
+
     public async getLatestProjects(count: number = 3): Promise<ProjectData[]> {
-        
+        const projects = await this.domain.module('project')
+            .get(GetLatestProjectsQuery)
+            .execute(count);
+        const factory = this.domain.module('project').get(ProjectDataFactory);
+        return projects.map(project => factory.createFromObject(project));
+    }
+
+    /**
+     * getProjectById()
+     * 
+     * gets a project by its id.
+     * @param id the id of the project to get.
+     * @returns The project associated with the ID.
+     * @throws ProjectNotFoundException when the project is not found.
+     * @throws ProjectsRepositoryException when the repository encounters a problem.
+     */
+
+    public async getProjectById(id: ProjectIdData): Promise<ProjectData> {
+        const project = await this.domain.module('project')
+            .get(GetProjectByIdQuery)
+            .execute(new ProjectId(id.id));
+        return this.domain.module('project')
+            .get(ProjectDataFactory)
+            .createFromObject(project);
+    }
+
+    /**
+     * getProjectsByTechnology()
+     * 
+     * gets projects associated with the specified technology.
+     * @param technology the technology to searc for
+     * @returns the projects associated with the technology.
+     * @throws ProjectNotFoundException when there is no projects found for that technology.
+     * @throws ProjectsRepositoryException when there is a problem with the repository.
+     */
+
+    public async getProjectsByTechnology(technology: TechnologyData): Promise<ProjectData[]> {
+        const projects = await this.domain.module('project')
+            .get(GetProjectsByTechnologyQuery)
+            .execute(new Technology(technology.technology));
+        const factory = this.domain.module('project').get(ProjectDataFactory);
+        return projects.map(project => factory.createFromObject(project));
     }
 
     /**
