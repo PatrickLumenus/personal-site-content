@@ -3,7 +3,8 @@ import {
     ProjectRepositoryInterface, 
     ProjectStatisticsInterface, 
     ProjectTitleInterface, 
-    ProjectWebsiteInterface 
+    ProjectWebsiteInterface, 
+    TechnologyInterface
 } from "../../values/values.well";
 
 
@@ -57,7 +58,16 @@ export interface ProjectInterface {
      * 
      * gets the project statistics.
      */
+
     statistics(): ProjectStatisticsInterface;
+
+    /**
+     * technologies()
+     * 
+     * gets the technologies.
+     */
+    
+    technologies(): TechnologyInterface[];
 
     /**
      * title()

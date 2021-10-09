@@ -1,4 +1,4 @@
-import { ProjectDescriptionInterface, ProjectRepositoryInterface, ProjectStatisticsInterface, ProjectTitleInterface, ProjectWebsiteInterface } from "../../values/values.well";
+import { ProjectDescriptionInterface, ProjectRepositoryInterface, ProjectStatisticsInterface, ProjectTitleInterface, ProjectWebsiteInterface, TechnologyInterface } from "../../values/values.well";
 export interface ProjectInterface {
     /**
      * desctiption()
@@ -39,6 +39,12 @@ export interface ProjectInterface {
      * gets the project statistics.
      */
     statistics(): ProjectStatisticsInterface;
+    /**
+     * technologies()
+     *
+     * gets the technologies.
+     */
+    technologies(): TechnologyInterface[];
     /**
      * title()
      *

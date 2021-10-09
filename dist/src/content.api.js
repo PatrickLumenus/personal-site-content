@@ -22,13 +22,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ContentApi = void 0;
 const core_1 = require("@domeniere/core");
 const blog_module_1 = __importStar(require("./blog/blog.module"));
+const project_module_1 = __importStar(require("./project/project.module"));
+/**
+ * ContentApi
+ *
+ * The content api.
+ */
 class ContentApi extends core_1.Api {
-    constructor(blogRepository, eventStore) {
+    constructor(blogRepository, projectRepository, eventStore) {
         super('content', eventStore);
         // Blog module.
         const blogModule = new blog_module_1.default();
         blogModule.registerRepositoryInstance(blog_module_1.BlogsRepository, blogRepository);
         this.registerModule(blogModule);
+        // Project module
+        const projectModule = new project_module_1.default();
+        projectModule.registerRepositoryInstance(project_module_1.ProjectsRepository, projectRepository);
+        this.registerModule(projectModule);
     }
     /**
      * getBlogPostById()

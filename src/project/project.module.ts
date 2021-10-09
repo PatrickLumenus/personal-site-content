@@ -1,4 +1,5 @@
 import { Module } from '@domeniere/module';
+import { ProjectsRepository } from './repositories/repositories.well';
 
 
 export default class ProjectModule extends Module {
@@ -8,6 +9,8 @@ export default class ProjectModule extends Module {
 
     protected createdBindings() {
         // register module bindings here.
+
+        this.bindRepository(ProjectsRepository);
     }
 }
 
@@ -16,3 +19,4 @@ export * from "./values/values.well";
 export * from "./exceptions/exceptions.well";
 export * from "./entities/entities.well";
 export * from "./aggregates/aggregates.well";
+export * from "./repositories/repositories.well";

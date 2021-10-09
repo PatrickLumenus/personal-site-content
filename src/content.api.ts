@@ -11,12 +11,19 @@ import BlogModule, {
     SearchTextData
 } from './blog/blog.module';
 import { ContentEventStore } from './content.eventstore';
+import ProjectModule, { ProjectsRepository } from './project/project.module';
 
+/**
+ * ContentApi
+ * 
+ * The content api.
+ */
 
 export class ContentApi extends Api {
 
     constructor(
         blogRepository: BlogsRepository,
+        projectRepository: ProjectsRepository,
         eventStore: ContentEventStore
     ) {
         super('content', eventStore);
@@ -25,6 +32,11 @@ export class ContentApi extends Api {
         const blogModule = new BlogModule();
         blogModule.registerRepositoryInstance(BlogsRepository, blogRepository);
         this.registerModule(blogModule);
+
+        // Project module
+        const projectModule = new ProjectModule();
+        projectModule.registerRepositoryInstance(ProjectsRepository, projectRepository);
+        this.registerModule(projectModule);
     }
 
     /**

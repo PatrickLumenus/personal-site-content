@@ -1,5 +1,5 @@
 import { Entity } from '@domeniere/entity';
-import { ProjectDescription, ProjectId, ProjectRepository, ProjectTitle, ProjectWebsite } from '../../values/values.well';
+import { ProjectDescription, ProjectId, ProjectRepository, ProjectTitle, ProjectWebsite, Technology } from '../../values/values.well';
 import { ProjectContentInterface } from './project-content.interface';
 /**
  * ProjectContent
@@ -9,9 +9,10 @@ import { ProjectContentInterface } from './project-content.interface';
 export declare class ProjectContent extends Entity implements ProjectContentInterface {
     private _description;
     private _repository;
+    private _technologies;
     private _title;
     private _website;
-    constructor(id: ProjectId, title: ProjectTitle, description: ProjectDescription, repository: ProjectRepository, website?: ProjectWebsite | null);
+    constructor(id: ProjectId, title: ProjectTitle, description: ProjectDescription, repository: ProjectRepository, technology?: Technology[], website?: ProjectWebsite | null);
     /**
      * desctiption()
      *
@@ -27,6 +28,12 @@ export declare class ProjectContent extends Entity implements ProjectContentInte
      */
     repository(): ProjectRepository;
     serializeData(): string;
+    /**
+     * technologies()
+     *
+     * gets the technologies for the project.
+     */
+    technologies(): Technology[];
     /**
      * title()
      *

@@ -11,12 +11,14 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const module_1 = require("@domeniere/module");
+const repositories_well_1 = require("./repositories/repositories.well");
 class ProjectModule extends module_1.Module {
     constructor() {
         super('project');
     }
     createdBindings() {
         // register module bindings here.
+        this.bindRepository(repositories_well_1.ProjectsRepository);
     }
 }
 exports.default = ProjectModule;
@@ -25,3 +27,4 @@ __exportStar(require("./values/values.well"), exports);
 __exportStar(require("./exceptions/exceptions.well"), exports);
 __exportStar(require("./entities/entities.well"), exports);
 __exportStar(require("./aggregates/aggregates.well"), exports);
+__exportStar(require("./repositories/repositories.well"), exports);

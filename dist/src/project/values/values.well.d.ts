@@ -10,4 +10,6 @@ export * from "./project-repository/project-repository.interface";
 export * from "./project-repository/project-repository";
 export * from "./project-statistics/project-statistics.interface";
 export * from "./project-statistics/project-statistics";
+export * from "./technology/technology.interface";
+export * from "./technology/technology";
 //# sourceMappingURL=values.well.d.ts.map

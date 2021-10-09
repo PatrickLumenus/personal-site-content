@@ -9,7 +9,8 @@ import {
     ProjectRepository, 
     ProjectStatistics, 
     ProjectTitle,
-    ProjectWebsite
+    ProjectWebsite,
+    Technology
 } from '../../values/values.well';
 import { ProjectInterface } from './project.interface';
 
@@ -125,6 +126,16 @@ export class Project extends TimestampedAggregate implements ProjectInterface {
      */
     public statistics(): ProjectStatistics {
         return this._stats;
+    }
+
+    /**
+     * technologies()
+     * 
+     * gets the technologies.
+     */
+
+    public technologies(): Technology[] {
+        return this.root().technologies();
     }
 
     /**

@@ -98,6 +98,14 @@ class Project extends aggregate_1.TimestampedAggregate {
         return this._stats;
     }
     /**
+     * technologies()
+     *
+     * gets the technologies.
+     */
+    technologies() {
+        return this.root().technologies();
+    }
+    /**
      * title()
      *
      * gets the project title.

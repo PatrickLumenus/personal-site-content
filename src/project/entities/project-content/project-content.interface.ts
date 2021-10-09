@@ -2,7 +2,8 @@ import {
     ProjectDescriptionInterface, 
     ProjectRepositoryInterface, 
     ProjectTitleInterface,
-    ProjectWebsiteInterface
+    ProjectWebsiteInterface,
+    TechnologyInterface
 } from "../../values/values.well";
 
 
@@ -23,6 +24,14 @@ export interface ProjectContentInterface {
      */
 
     repository(): ProjectRepositoryInterface;
+
+    /**
+     * technologies()
+     * 
+     * gets the technologies for the project.
+     */
+    
+    technologies(): TechnologyInterface[];
 
     /**
      * title()

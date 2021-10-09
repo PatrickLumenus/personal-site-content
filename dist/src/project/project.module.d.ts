@@ -7,4 +7,5 @@ export * from "./values/values.well";
 export * from "./exceptions/exceptions.well";
 export * from "./entities/entities.well";
 export * from "./aggregates/aggregates.well";
+export * from "./repositories/repositories.well";
 //# sourceMappingURL=project.module.d.ts.map

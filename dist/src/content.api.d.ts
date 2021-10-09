@@ -1,8 +1,14 @@
 import { Api } from '@domeniere/core';
 import { BlogIdData, BlogPostData, BlogsRepository, SearchTextData } from './blog/blog.module';
 import { ContentEventStore } from './content.eventstore';
+import { ProjectsRepository } from './project/project.module';
+/**
+ * ContentApi
+ *
+ * The content api.
+ */
 export declare class ContentApi extends Api {
-    constructor(blogRepository: BlogsRepository, eventStore: ContentEventStore);
+    constructor(blogRepository: BlogsRepository, projectRepository: ProjectsRepository, eventStore: ContentEventStore);
     /**
      * getBlogPostById()
      *

@@ -1,7 +1,7 @@
 import { TimestampedAggregate } from '@domeniere/aggregate';
 import { DateTime } from '@swindle/core';
 import { ProjectContent } from '../../entities/entities.well';
-import { ProjectDescription, ProjectId, ProjectRepository, ProjectStatistics, ProjectTitle, ProjectWebsite } from '../../values/values.well';
+import { ProjectDescription, ProjectId, ProjectRepository, ProjectStatistics, ProjectTitle, ProjectWebsite, Technology } from '../../values/values.well';
 import { ProjectInterface } from './project.interface';
 /**
  * Project
@@ -54,6 +54,12 @@ export declare class Project extends TimestampedAggregate implements ProjectInte
      * gets the project statistics.
      */
     statistics(): ProjectStatistics;
+    /**
+     * technologies()
+     *
+     * gets the technologies.
+     */
+    technologies(): Technology[];
     /**
      * title()
      *

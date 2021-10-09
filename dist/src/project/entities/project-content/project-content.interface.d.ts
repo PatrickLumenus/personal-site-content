@@ -1,4 +1,4 @@
-import { ProjectDescriptionInterface, ProjectRepositoryInterface, ProjectTitleInterface, ProjectWebsiteInterface } from "../../values/values.well";
+import { ProjectDescriptionInterface, ProjectRepositoryInterface, ProjectTitleInterface, ProjectWebsiteInterface, TechnologyInterface } from "../../values/values.well";
 export interface ProjectContentInterface {
     /**
      * desctiption()
@@ -12,6 +12,12 @@ export interface ProjectContentInterface {
      * gets the project repository.
      */
     repository(): ProjectRepositoryInterface;
+    /**
+     * technologies()
+     *
+     * gets the technologies for the project.
+     */
+    technologies(): TechnologyInterface[];
     /**
      * title()
      *

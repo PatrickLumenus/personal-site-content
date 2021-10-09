@@ -5,7 +5,8 @@ import {
     ProjectId, 
     ProjectRepository,
     ProjectTitle,
-    ProjectWebsite
+    ProjectWebsite,
+    Technology
 } from '../../values/values.well';
 import { ProjectContentInterface } from './project-content.interface';
 
@@ -24,6 +25,9 @@ import { ProjectContentInterface } from './project-content.interface';
     private _repository: ProjectRepository;
 
     @State()
+    private _technologies: Technology[];
+
+    @State()
     private _title: ProjectTitle;
 
     @State()
@@ -34,11 +38,13 @@ import { ProjectContentInterface } from './project-content.interface';
         title: ProjectTitle,
         description: ProjectDescription,
         repository: ProjectRepository,
+        technology: Technology[] = [],
         website: ProjectWebsite|null = null
     ) {
         super(id);
         this._description = description;
         this._repository = repository;
+        this._technologies = technology;
         this._title = title;
         this._website = website;
     }
@@ -83,8 +89,19 @@ import { ProjectContentInterface } from './project-content.interface';
             title: this.title().serialize(),
             description: this.description().serialize(),
             repository: this.repository().serialize(),
+            technologies: this.technologies().map(tech => tech.serialize()),
             website: this.website() ? this.website()?.serialize() : ""
         });
+    }
+
+     /**
+      * technologies()
+      * 
+      * gets the technologies for the project.
+      */
+
+    public technologies(): Technology[] {
+        return this._technologies.map(tech => tech);
     }
 
      /**

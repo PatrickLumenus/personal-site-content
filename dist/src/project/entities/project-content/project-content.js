@@ -19,10 +19,11 @@ const values_well_1 = require("../../values/values.well");
  * Project content.
  */
 class ProjectContent extends entity_1.Entity {
-    constructor(id, title, description, repository, website = null) {
+    constructor(id, title, description, repository, technology = [], website = null) {
         super(id);
         this._description = description;
         this._repository = repository;
+        this._technologies = technology;
         this._title = title;
         this._website = website;
     }
@@ -59,8 +60,17 @@ class ProjectContent extends entity_1.Entity {
             title: this.title().serialize(),
             description: this.description().serialize(),
             repository: this.repository().serialize(),
+            technologies: this.technologies().map(tech => tech.serialize()),
             website: this.website() ? (_a = this.website()) === null || _a === void 0 ? void 0 : _a.serialize() : ""
         });
+    }
+    /**
+     * technologies()
+     *
+     * gets the technologies for the project.
+     */
+    technologies() {
+        return this._technologies.map(tech => tech);
     }
     /**
      * title()
@@ -87,6 +97,10 @@ __decorate([
     (0, common_1.State)(),
     __metadata("design:type", values_well_1.ProjectRepository)
 ], ProjectContent.prototype, "_repository", void 0);
+__decorate([
+    (0, common_1.State)(),
+    __metadata("design:type", Array)
+], ProjectContent.prototype, "_technologies", void 0);
 __decorate([
     (0, common_1.State)(),
     __metadata("design:type", values_well_1.ProjectTitle)
