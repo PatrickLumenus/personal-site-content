@@ -11,7 +11,7 @@ import BlogModule, {
     SearchTextData
 } from './blog/blog.module';
 import { ContentEventStore } from './content.eventstore';
-import ProjectModule, { ProjectsRepository } from './project/project.module';
+import ProjectModule, { ProjectData, ProjectsRepository } from './project/project.module';
 
 /**
  * ContentApi
@@ -76,6 +76,10 @@ export class ContentApi extends Api {
             .execute(count, start);
         const factory = this.domain.module('blog').get(BlogDataFactory);
         return results.map(post => factory.createFromObject(post));
+    }
+
+    public async getLatestProjects(count: number = 3): Promise<ProjectData[]> {
+        
     }
 
     /**
