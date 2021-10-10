@@ -3,4 +3,5 @@ export * from './src/content.eventstore';
 export * from "./src/blog/blog.module";
 export * from "./src/project/project.module";
 export * from "./src/subscriber/subscriber.module";
+export * from "./src/communication/communication.module";
 //# sourceMappingURL=index.d.ts.map

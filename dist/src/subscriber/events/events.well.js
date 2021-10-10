@@ -12,3 +12,4 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 // exceptions well
 __exportStar(require("./subscriber-created.event"), exports);
+__exportStar(require("./subscriber-deleted.event"), exports);

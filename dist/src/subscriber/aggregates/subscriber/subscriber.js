@@ -13,6 +13,15 @@ class Subscriber extends aggregate_1.TimestampedAggregate {
         super(root, version, createdOn, updatedOn, deletedOn);
     }
     /**
+     * delete()
+     *
+     * deletes a subscriber.
+     */
+    delete() {
+        this.setDeleted(core_1.DateTime.Now());
+        this.commitStateChanges();
+    }
+    /**
      * email()
      *
      * gets the subscriber email address

@@ -1,17 +1,18 @@
 import { Api } from '@domeniere/core';
 import { EmailAddress } from '@swindle/core';
 import { BlogIdData, BlogPostData, BlogsRepository, SearchTextData } from './blog/blog.module';
+import { SendGoodbyeMessageCommand, SendWelcomeMessageCommand } from './communication/communication.module';
 import { ContentEventStore } from './content.eventstore';
 import { ProjectIdData } from './project/data/project-id.data';
 import { ProjectData, ProjectsRepository, TechnologyData } from './project/project.module';
-import { SubscriberCreated, SubscriberRepository } from './subscriber/subscriber.module';
+import { SubscriberCreated, SubscriberDeleted, SubscriberRepository } from './subscriber/subscriber.module';
 /**
  * ContentApi
  *
  * The content api.
  */
 export declare class ContentApi extends Api {
-    constructor(blogRepository: BlogsRepository, projectRepository: ProjectsRepository, subscriberRepository: SubscriberRepository, eventStore: ContentEventStore);
+    constructor(blogRepository: BlogsRepository, projectRepository: ProjectsRepository, subscriberRepository: SubscriberRepository, sendWelcomeMessage: SendWelcomeMessageCommand, sendGoodbyeMessage: SendGoodbyeMessageCommand, eventStore: ContentEventStore);
     /**
      * createSubscriber()
      *
@@ -72,6 +73,15 @@ export declare class ContentApi extends Api {
      */
     getProjectsByTechnology(technology: TechnologyData): Promise<ProjectData[]>;
     /**
+     * removeSubscriber()
+     *
+     * removes a subscriber.
+     * @param email the email address to remove.
+     * @throws SubscriberNotFoundException when the subscriber cannot be found.
+     * @throws SubscriberRepositoryException when there is a problem with the subscriber repository.
+     */
+    removeSubscriber(email: EmailAddress): Promise<void>;
+    /**
      * searchBlogs()
      *
      * searches the blogs.
@@ -83,6 +93,7 @@ export declare class ContentApi extends Api {
      * @throws BlogPostNotFoundException when there are no results for the query.
      */
     searchBlogs(query: SearchTextData, count?: number, start?: number): Promise<BlogPostData[]>;
+    sendGoodbyeMessage(event: SubscriberDeleted): Promise<void>;
     sendWelcomeMessage(event: SubscriberCreated): Promise<void>;
 }
 //# sourceMappingURL=content.api.d.ts.map

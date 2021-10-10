@@ -1,6 +1,12 @@
 import { EmailAddress } from "@swindle/core";
 export interface SubscriberInterface {
     /**
+     * delete()
+     *
+     * deletes a subscriber.
+     */
+    delete(): void;
+    /**
      * email()
      *
      * gets the subscriber email address

@@ -33,6 +33,7 @@ const common_1 = require("@domeniere/common");
 const core_1 = require("@domeniere/core");
 const event_1 = require("@domeniere/event");
 const blog_module_1 = __importStar(require("./blog/blog.module"));
+const communication_module_1 = __importStar(require("./communication/communication.module"));
 const project_module_1 = __importStar(require("./project/project.module"));
 const get_projects_by_technology_query_1 = require("./project/services/get-projects-by-technology.query");
 const subscriber_module_1 = __importStar(require("./subscriber/subscriber.module"));
@@ -42,7 +43,7 @@ const subscriber_module_1 = __importStar(require("./subscriber/subscriber.module
  * The content api.
  */
 class ContentApi extends core_1.Api {
-    constructor(blogRepository, projectRepository, subscriberRepository, eventStore) {
+    constructor(blogRepository, projectRepository, subscriberRepository, sendWelcomeMessage, sendGoodbyeMessage, eventStore) {
         super('content', eventStore);
         // Blog module.
         const blogModule = new blog_module_1.default();
@@ -56,6 +57,11 @@ class ContentApi extends core_1.Api {
         const subscriberModule = new subscriber_module_1.default();
         subscriberModule.registerRepositoryInstance(subscriber_module_1.SubscriberRepository, subscriberRepository);
         this.registerModule(subscriberModule);
+        // communication module
+        const communicationModule = new communication_module_1.default();
+        communicationModule.registerServiceInstance(communication_module_1.SendWelcomeMessageCommand, sendWelcomeMessage);
+        communicationModule.registerServiceInstance(communication_module_1.SendGoodbyeMessageCommand, sendGoodbyeMessage);
+        this.registerModule(communicationModule);
     }
     /**
      * createSubscriber()
@@ -154,6 +160,19 @@ class ContentApi extends core_1.Api {
         return projects.map(project => factory.createFromObject(project));
     }
     /**
+     * removeSubscriber()
+     *
+     * removes a subscriber.
+     * @param email the email address to remove.
+     * @throws SubscriberNotFoundException when the subscriber cannot be found.
+     * @throws SubscriberRepositoryException when there is a problem with the subscriber repository.
+     */
+    async removeSubscriber(email) {
+        await this.domain.module('subscriber')
+            .get(subscriber_module_1.RemoveSubscriberCommand)
+            .execute(email);
+    }
+    /**
      * searchBlogs()
      *
      * searches the blogs.
@@ -172,10 +191,25 @@ class ContentApi extends core_1.Api {
         return results.map(post => factory.createFromObject(post));
     }
     // event handlers
+    async sendGoodbyeMessage(event) {
+        // send the goodbye message
+        await this.domain.module('communication')
+            .get(communication_module_1.SendGoodbyeMessageCommand)
+            .execute(event.subscriber().email());
+    }
     async sendWelcomeMessage(event) {
         // send welcome email.
+        await this.domain.module('communication')
+            .get(communication_module_1.SendWelcomeMessageCommand)
+            .execute(event.subscriber().email());
     }
 }
+__decorate([
+    (0, common_1.On)(subscriber_module_1.SubscriberDeleted, event_1.DomainEventHandlerPriority.MEDIUM, "send-goodbye-message"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [subscriber_module_1.SubscriberDeleted]),
+    __metadata("design:returntype", Promise)
+], ContentApi.prototype, "sendGoodbyeMessage", null);
 __decorate([
     (0, common_1.On)(subscriber_module_1.SubscriberCreated, event_1.DomainEventHandlerPriority.MEDIUM, "send-welcome-message"),
     __metadata("design:type", Function),

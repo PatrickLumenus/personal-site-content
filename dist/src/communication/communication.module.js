@@ -10,10 +10,18 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// The index file
-__exportStar(require("./src/content.api"), exports);
-__exportStar(require("./src/content.eventstore"), exports);
-__exportStar(require("./src/blog/blog.module"), exports);
-__exportStar(require("./src/project/project.module"), exports);
-__exportStar(require("./src/subscriber/subscriber.module"), exports);
-__exportStar(require("./src/communication/communication.module"), exports);
+const module_1 = require("@domeniere/module");
+const services_well_1 = require("./services/services.well");
+class CommunicationModule extends module_1.Module {
+    constructor() {
+        super('communication');
+    }
+    createdBindings() {
+        // register module bindings here.
+        this.bindServiceInstance(services_well_1.SendWelcomeMessageCommand);
+        this.bindServiceInstance(services_well_1.SendGoodbyeMessageCommand);
+    }
+}
+exports.default = CommunicationModule;
+// module well exports go here.
+__exportStar(require("./services/services.well"), exports);

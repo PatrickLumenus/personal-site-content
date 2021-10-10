@@ -10,6 +10,12 @@ import { SubscriberInterface } from './subscriber.interface';
 export declare class Subscriber extends TimestampedAggregate implements SubscriberInterface {
     constructor(root: SubscriberProfile, version?: number | undefined, createdOn?: DateTime, updatedOn?: DateTime, deletedOn?: DateTime | null);
     /**
+     * delete()
+     *
+     * deletes a subscriber.
+     */
+    delete(): void;
+    /**
      * email()
      *
      * gets the subscriber email address

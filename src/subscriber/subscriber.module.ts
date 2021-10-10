@@ -1,7 +1,13 @@
 import { Module } from '@domeniere/module';
-import { SubscriberDataFactory, SubscriberFactory } from './factories/factories.well';
+import { 
+    SubscriberDataFactory, 
+    SubscriberFactory 
+} from './factories/factories.well';
 import { SubscriberRepository } from './repositories/repositories.well';
-import { CreateSubscriberCommand } from './services/services.well';
+import { 
+    CreateSubscriberCommand, 
+    RemoveSubscriberCommand 
+} from './services/services.well';
 
 
 export default class SubscriberModule extends Module {
@@ -26,6 +32,9 @@ export default class SubscriberModule extends Module {
                 module.get(SubscriberRepository)
             );
         });
+        this.bindService(RemoveSubscriberCommand, (module) => {
+            return new RemoveSubscriberCommand(module.get(SubscriberRepository));
+        })
     }
 }
 

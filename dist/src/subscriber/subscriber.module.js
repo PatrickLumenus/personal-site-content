@@ -29,6 +29,9 @@ class SubscriberModule extends module_1.Module {
         this.bindService(services_well_1.CreateSubscriberCommand, (module) => {
             return new services_well_1.CreateSubscriberCommand(module.get(factories_well_1.SubscriberFactory), module.get(repositories_well_1.SubscriberRepository));
         });
+        this.bindService(services_well_1.RemoveSubscriberCommand, (module) => {
+            return new services_well_1.RemoveSubscriberCommand(module.get(repositories_well_1.SubscriberRepository));
+        });
     }
 }
 exports.default = SubscriberModule;

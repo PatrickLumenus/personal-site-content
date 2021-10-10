@@ -14,3 +14,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./subscriber-id.exception"), exports);
 __exportStar(require("./subscriber-repository.exception"), exports);
 __exportStar(require("./email-already-in-use.exception"), exports);
+__exportStar(require("./subscriber-not-found.exception"), exports);

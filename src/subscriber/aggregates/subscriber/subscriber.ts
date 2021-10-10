@@ -22,6 +22,17 @@ export class Subscriber extends TimestampedAggregate implements SubscriberInterf
     }
 
     /**
+     * delete()
+     * 
+     * deletes a subscriber.
+     */
+
+    public delete(): void {
+        this.setDeleted(DateTime.Now());
+        this.commitStateChanges();
+    }
+
+    /**
      * email()
      * 
      * gets the subscriber email address

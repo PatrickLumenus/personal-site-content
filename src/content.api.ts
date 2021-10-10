@@ -1,6 +1,7 @@
 import { On } from '@domeniere/common';
 import { Api } from '@domeniere/core';
-import { DomainEventHandlerPriority } from '@domeniere/event';
+import { 
+    DomainEventHandlerPriority} from '@domeniere/event';
 import { EmailAddress } from '@swindle/core';
 import BlogModule, { 
     BlogDataFactory,
@@ -13,6 +14,10 @@ import BlogModule, {
     SearchBlogPostsQuery,
     SearchTextData
 } from './blog/blog.module';
+import CommunicationModule, { 
+    SendGoodbyeMessageCommand,
+    SendWelcomeMessageCommand, 
+} from './communication/communication.module';
 import { ContentEventStore } from './content.eventstore';
 import { ProjectIdData } from './project/data/project-id.data';
 import ProjectModule, { 
@@ -28,7 +33,9 @@ import ProjectModule, {
 import { GetProjectsByTechnologyQuery } from './project/services/get-projects-by-technology.query';
 import SubscriberModule, { 
     CreateSubscriberCommand,
+    RemoveSubscriberCommand,
     SubscriberCreated,
+    SubscriberDeleted,
     SubscriberRepository,
     SubscriberRequest, 
 } from './subscriber/subscriber.module';
@@ -45,6 +52,8 @@ export class ContentApi extends Api {
         blogRepository: BlogsRepository,
         projectRepository: ProjectsRepository,
         subscriberRepository: SubscriberRepository,
+        sendWelcomeMessage: SendWelcomeMessageCommand,
+        sendGoodbyeMessage: SendGoodbyeMessageCommand,
         eventStore: ContentEventStore
     ) {
         super('content', eventStore);
@@ -63,6 +72,12 @@ export class ContentApi extends Api {
         const subscriberModule = new SubscriberModule();
         subscriberModule.registerRepositoryInstance(SubscriberRepository, subscriberRepository);
         this.registerModule(subscriberModule);
+
+        // communication module
+        const communicationModule = new CommunicationModule();
+        communicationModule.registerServiceInstance(SendWelcomeMessageCommand, sendWelcomeMessage);
+        communicationModule.registerServiceInstance(SendGoodbyeMessageCommand, sendGoodbyeMessage);
+        this.registerModule(communicationModule);
     }
 
     /**
@@ -175,6 +190,21 @@ export class ContentApi extends Api {
     }
 
     /**
+     * removeSubscriber()
+     * 
+     * removes a subscriber.
+     * @param email the email address to remove.
+     * @throws SubscriberNotFoundException when the subscriber cannot be found.
+     * @throws SubscriberRepositoryException when there is a problem with the subscriber repository.
+     */
+
+    public async removeSubscriber(email: EmailAddress): Promise<void> {
+        await this.domain.module('subscriber')
+            .get(RemoveSubscriberCommand)
+            .execute(email);
+    }
+
+    /**
      * searchBlogs()
      * 
      * searches the blogs.
@@ -196,8 +226,19 @@ export class ContentApi extends Api {
 
     // event handlers
 
+    @On(SubscriberDeleted, DomainEventHandlerPriority.MEDIUM, "send-goodbye-message")
+    public async sendGoodbyeMessage(event: SubscriberDeleted): Promise<void> {
+        // send the goodbye message
+        await this.domain.module('communication')
+            .get(SendGoodbyeMessageCommand)
+            .execute(event.subscriber().email());
+    }
+
     @On(SubscriberCreated, DomainEventHandlerPriority.MEDIUM, "send-welcome-message")
     public async sendWelcomeMessage(event: SubscriberCreated): Promise<void> {
         // send welcome email.
+        await this.domain.module('communication')
+            .get(SendWelcomeMessageCommand)
+            .execute(event.subscriber().email());
     }
 }
