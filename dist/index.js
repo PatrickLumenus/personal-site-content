@@ -15,3 +15,4 @@ __exportStar(require("./src/content.api"), exports);
 __exportStar(require("./src/content.eventstore"), exports);
 __exportStar(require("./src/blog/blog.module"), exports);
 __exportStar(require("./src/project/project.module"), exports);
+__exportStar(require("./src/subscriber/subscriber.module"), exports);

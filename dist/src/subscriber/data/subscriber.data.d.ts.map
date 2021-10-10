@@ -1,0 +1,1 @@
+{"version":3,"file":"subscriber.data.d.ts","sourceRoot":"","sources":["../../../../src/subscriber/data/subscriber.data.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,IAAI,EAAE,MAAM,gBAAgB,CAAC;AAItC,qBAAa,cAAe,SAAQ,IAAI;IAEpC,SAAgB,EAAE,EAAE,MAAM,CAAC;IAC3B,SAAgB,KAAK,EAAE,MAAM,CAAC;gBAElB,EAAE,EAAE,MAAM,EAAE,KAAK,EAAE,MAAM;IAM9B,SAAS,IAAI,MAAM;CAM7B"}

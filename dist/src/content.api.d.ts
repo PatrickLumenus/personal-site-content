@@ -1,15 +1,26 @@
 import { Api } from '@domeniere/core';
+import { EmailAddress } from '@swindle/core';
 import { BlogIdData, BlogPostData, BlogsRepository, SearchTextData } from './blog/blog.module';
 import { ContentEventStore } from './content.eventstore';
 import { ProjectIdData } from './project/data/project-id.data';
 import { ProjectData, ProjectsRepository, TechnologyData } from './project/project.module';
+import { SubscriberCreated, SubscriberRepository } from './subscriber/subscriber.module';
 /**
  * ContentApi
  *
  * The content api.
  */
 export declare class ContentApi extends Api {
-    constructor(blogRepository: BlogsRepository, projectRepository: ProjectsRepository, eventStore: ContentEventStore);
+    constructor(blogRepository: BlogsRepository, projectRepository: ProjectsRepository, subscriberRepository: SubscriberRepository, eventStore: ContentEventStore);
+    /**
+     * createSubscriber()
+     *
+     * creates a subscriber.
+     * @param email the email address to subscribe with.
+     * @throws EmailAlreadyInUseException when the email is already in use.
+     * @throws SubscriberRepositoryException when there is a problem with the subscriber repository.
+     */
+    createSubscriber(email: EmailAddress): Promise<void>;
     /**
      * getBlogPostById()
      *
@@ -72,5 +83,6 @@ export declare class ContentApi extends Api {
      * @throws BlogPostNotFoundException when there are no results for the query.
      */
     searchBlogs(query: SearchTextData, count?: number, start?: number): Promise<BlogPostData[]>;
+    sendWelcomeMessage(event: SubscriberCreated): Promise<void>;
 }
 //# sourceMappingURL=content.api.d.ts.map

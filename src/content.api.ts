@@ -1,4 +1,7 @@
+import { On } from '@domeniere/common';
 import { Api } from '@domeniere/core';
+import { DomainEventHandlerPriority } from '@domeniere/event';
+import { EmailAddress } from '@swindle/core';
 import BlogModule, { 
     BlogDataFactory,
     BlogId,
@@ -23,6 +26,12 @@ import ProjectModule, {
     TechnologyData
 } from './project/project.module';
 import { GetProjectsByTechnologyQuery } from './project/services/get-projects-by-technology.query';
+import SubscriberModule, { 
+    CreateSubscriberCommand,
+    SubscriberCreated,
+    SubscriberRepository,
+    SubscriberRequest, 
+} from './subscriber/subscriber.module';
 
 /**
  * ContentApi
@@ -35,6 +44,7 @@ export class ContentApi extends Api {
     constructor(
         blogRepository: BlogsRepository,
         projectRepository: ProjectsRepository,
+        subscriberRepository: SubscriberRepository,
         eventStore: ContentEventStore
     ) {
         super('content', eventStore);
@@ -48,6 +58,27 @@ export class ContentApi extends Api {
         const projectModule = new ProjectModule();
         projectModule.registerRepositoryInstance(ProjectsRepository, projectRepository);
         this.registerModule(projectModule);
+
+        // subscriber module
+        const subscriberModule = new SubscriberModule();
+        subscriberModule.registerRepositoryInstance(SubscriberRepository, subscriberRepository);
+        this.registerModule(subscriberModule);
+    }
+
+    /**
+     * createSubscriber()
+     * 
+     * creates a subscriber.
+     * @param email the email address to subscribe with.
+     * @throws EmailAlreadyInUseException when the email is already in use.
+     * @throws SubscriberRepositoryException when there is a problem with the subscriber repository.
+     */
+
+    public async createSubscriber(email: EmailAddress): Promise<void> {
+        const request = new SubscriberRequest(email);
+        await this.domain.module('subscriber')
+            .get(CreateSubscriberCommand)
+            .execute(request);
     }
 
     /**
@@ -161,5 +192,12 @@ export class ContentApi extends Api {
             .execute(query.content, count, start);
         const factory = this.domain.module('blog').get(BlogDataFactory);
         return results.map(post => factory.createFromObject(post));
+    }
+
+    // event handlers
+
+    @On(SubscriberCreated, DomainEventHandlerPriority.MEDIUM, "send-welcome-message")
+    public async sendWelcomeMessage(event: SubscriberCreated): Promise<void> {
+        // send welcome email.
     }
 }

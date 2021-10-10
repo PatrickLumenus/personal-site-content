@@ -11,6 +11,12 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 }) : function(o, v) {
     o["default"] = v;
 });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -18,19 +24,25 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ContentApi = void 0;
+const common_1 = require("@domeniere/common");
 const core_1 = require("@domeniere/core");
+const event_1 = require("@domeniere/event");
 const blog_module_1 = __importStar(require("./blog/blog.module"));
 const project_module_1 = __importStar(require("./project/project.module"));
 const get_projects_by_technology_query_1 = require("./project/services/get-projects-by-technology.query");
+const subscriber_module_1 = __importStar(require("./subscriber/subscriber.module"));
 /**
  * ContentApi
  *
  * The content api.
  */
 class ContentApi extends core_1.Api {
-    constructor(blogRepository, projectRepository, eventStore) {
+    constructor(blogRepository, projectRepository, subscriberRepository, eventStore) {
         super('content', eventStore);
         // Blog module.
         const blogModule = new blog_module_1.default();
@@ -40,6 +52,24 @@ class ContentApi extends core_1.Api {
         const projectModule = new project_module_1.default();
         projectModule.registerRepositoryInstance(project_module_1.ProjectsRepository, projectRepository);
         this.registerModule(projectModule);
+        // subscriber module
+        const subscriberModule = new subscriber_module_1.default();
+        subscriberModule.registerRepositoryInstance(subscriber_module_1.SubscriberRepository, subscriberRepository);
+        this.registerModule(subscriberModule);
+    }
+    /**
+     * createSubscriber()
+     *
+     * creates a subscriber.
+     * @param email the email address to subscribe with.
+     * @throws EmailAlreadyInUseException when the email is already in use.
+     * @throws SubscriberRepositoryException when there is a problem with the subscriber repository.
+     */
+    async createSubscriber(email) {
+        const request = new subscriber_module_1.SubscriberRequest(email);
+        await this.domain.module('subscriber')
+            .get(subscriber_module_1.CreateSubscriberCommand)
+            .execute(request);
     }
     /**
      * getBlogPostById()
@@ -141,5 +171,15 @@ class ContentApi extends core_1.Api {
         const factory = this.domain.module('blog').get(blog_module_1.BlogDataFactory);
         return results.map(post => factory.createFromObject(post));
     }
+    // event handlers
+    async sendWelcomeMessage(event) {
+        // send welcome email.
+    }
 }
+__decorate([
+    (0, common_1.On)(subscriber_module_1.SubscriberCreated, event_1.DomainEventHandlerPriority.MEDIUM, "send-welcome-message"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [subscriber_module_1.SubscriberCreated]),
+    __metadata("design:returntype", Promise)
+], ContentApi.prototype, "sendWelcomeMessage", null);
 exports.ContentApi = ContentApi;
