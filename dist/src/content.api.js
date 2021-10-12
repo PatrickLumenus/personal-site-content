@@ -191,6 +191,9 @@ class ContentApi extends core_1.Api {
         return results.map(post => factory.createFromObject(post));
     }
     // event handlers
+    async logEventHandlerFailed(event) {
+        console.log(event.error().message);
+    }
     async sendGoodbyeMessage(event) {
         // send the goodbye message
         await this.domain.module('communication')
@@ -204,6 +207,12 @@ class ContentApi extends core_1.Api {
             .execute(event.subscriber().email());
     }
 }
+__decorate([
+    (0, common_1.On)(event_1.EventHandlerFailed),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [event_1.EventHandlerFailed]),
+    __metadata("design:returntype", Promise)
+], ContentApi.prototype, "logEventHandlerFailed", null);
 __decorate([
     (0, common_1.On)(subscriber_module_1.SubscriberDeleted, event_1.DomainEventHandlerPriority.MEDIUM, "send-goodbye-message"),
     __metadata("design:type", Function),

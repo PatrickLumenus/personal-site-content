@@ -1,4 +1,5 @@
 import { Api } from '@domeniere/core';
+import { EventHandlerFailed } from '@domeniere/event';
 import { EmailAddress } from '@swindle/core';
 import { BlogIdData, BlogPostData, BlogsRepository, SearchTextData } from './blog/blog.module';
 import { SendGoodbyeMessageCommand, SendWelcomeMessageCommand } from './communication/communication.module';
@@ -93,6 +94,7 @@ export declare class ContentApi extends Api {
      * @throws BlogPostNotFoundException when there are no results for the query.
      */
     searchBlogs(query: SearchTextData, count?: number, start?: number): Promise<BlogPostData[]>;
+    logEventHandlerFailed(event: EventHandlerFailed): Promise<void>;
     sendGoodbyeMessage(event: SubscriberDeleted): Promise<void>;
     sendWelcomeMessage(event: SubscriberCreated): Promise<void>;
 }

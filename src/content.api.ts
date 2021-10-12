@@ -1,7 +1,9 @@
 import { On } from '@domeniere/common';
 import { Api } from '@domeniere/core';
 import { 
-    DomainEventHandlerPriority} from '@domeniere/event';
+    DomainEventHandlerPriority,
+    EventHandlerFailed
+} from '@domeniere/event';
 import { EmailAddress } from '@swindle/core';
 import BlogModule, { 
     BlogDataFactory,
@@ -225,6 +227,11 @@ export class ContentApi extends Api {
     }
 
     // event handlers
+
+    @On(EventHandlerFailed)
+    public async logEventHandlerFailed(event: EventHandlerFailed): Promise<void> {
+        console.log(event.error().message);
+    }
 
     @On(SubscriberDeleted, DomainEventHandlerPriority.MEDIUM, "send-goodbye-message")
     public async sendGoodbyeMessage(event: SubscriberDeleted): Promise<void> {
