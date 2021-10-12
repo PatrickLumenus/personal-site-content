@@ -26,7 +26,9 @@ class SubscriberDeleted extends event_1.DomainEvent {
         return false;
     }
     serializeData() {
-        throw new core_1.MethodUndefinedException();
+        return JSON.stringify({
+            subscriber: this.subscriber().serialize(),
+        });
     }
     shouldBeBroadcasted() {
         return true;

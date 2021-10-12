@@ -1,5 +1,5 @@
 import { DomainEvent } from '@domeniere/event';
-import { DateTime, MethodUndefinedException } from '@swindle/core';
+import { DateTime } from '@swindle/core';
 import { Subscriber } from '../aggregates/aggregates.well';
 
 /**
@@ -38,7 +38,9 @@ export class SubscriberDeleted extends DomainEvent {
     }
 
     public serializeData(): string {
-        throw new MethodUndefinedException();
+        return JSON.stringify({
+            subscriber: this.subscriber().serialize(),
+        })
     }
 
     public shouldBeBroadcasted(): boolean {
