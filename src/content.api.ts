@@ -1,4 +1,5 @@
-import { On } from '@domeniere/common';
+import { On, OnError } from '@domeniere/common';
+import { DomainEvent } from '@domeniere/event';
 import { Api } from '@domeniere/core';
 import { 
     DomainEventHandlerPriority,
@@ -41,6 +42,9 @@ import SubscriberModule, {
     SubscriberRepository,
     SubscriberRequest, 
 } from './subscriber/subscriber.module';
+import UtilitiesModule, { 
+    HandleErrorEventsCommand 
+} from './utilities/utilities.module';
 
 /**
  * ContentApi
@@ -56,6 +60,7 @@ export class ContentApi extends Api {
         subscriberRepository: SubscriberRepository,
         sendWelcomeMessage: SendWelcomeMessageCommand,
         sendGoodbyeMessage: SendGoodbyeMessageCommand,
+        handleErrors: HandleErrorEventsCommand,
         eventStore: ContentEventStore
     ) {
         super('content', eventStore);
@@ -80,6 +85,11 @@ export class ContentApi extends Api {
         communicationModule.registerServiceInstance(SendWelcomeMessageCommand, sendWelcomeMessage);
         communicationModule.registerServiceInstance(SendGoodbyeMessageCommand, sendGoodbyeMessage);
         this.registerModule(communicationModule);
+
+        // utilities module
+        const utilitiesModule = new UtilitiesModule();
+        utilitiesModule.registerServiceInstance(HandleErrorEventsCommand, handleErrors);
+        this.registerModule(utilitiesModule);
     }
 
     /**
@@ -126,6 +136,7 @@ export class ContentApi extends Api {
      * @param count the number of posts to get.
      * @param start the starting position.
      * @returns the latest posts.
+     * @throws BlogPostNotFoundException when there are no blog posts to retrieve.
      * @throws BlogRepositoryException when there is a problem with the repository.
      */
 
@@ -143,6 +154,7 @@ export class ContentApi extends Api {
      * gets the latest projects
      * @param count the number of projects to get.
      * @returns the latest projects.
+     * @throws ProjectNotFoundException when there are no projects to be retrieved
      * @throws ProjectsRepositoryException when there is a problem with the repository.
      */
 
@@ -160,6 +172,7 @@ export class ContentApi extends Api {
      * gets a project by its id.
      * @param id the id of the project to get.
      * @returns The project associated with the ID.
+     * @throws ProjectIdException when the project id is invalid.
      * @throws ProjectNotFoundException when the project is not found.
      * @throws ProjectsRepositoryException when the repository encounters a problem.
      */
@@ -179,6 +192,7 @@ export class ContentApi extends Api {
      * gets projects associated with the specified technology.
      * @param technology the technology to searc for
      * @returns the projects associated with the technology.
+     * @throws ProjectTechnologyException when the technology is invalid.
      * @throws ProjectNotFoundException when there is no projects found for that technology.
      * @throws ProjectsRepositoryException when there is a problem with the repository.
      */
@@ -228,9 +242,11 @@ export class ContentApi extends Api {
 
     // event handlers
 
-    @On(EventHandlerFailed)
-    public async logEventHandlerFailed(event: EventHandlerFailed): Promise<void> {
-        console.log(event.error().message);
+    @OnError()
+    public async handleErrors(event: DomainEvent): Promise<void> {
+        await this.domain.module('utilities')
+            .get(HandleErrorEventsCommand)
+            .execute(event);
     }
 
     @On(SubscriberDeleted, DomainEventHandlerPriority.MEDIUM, "send-goodbye-message")

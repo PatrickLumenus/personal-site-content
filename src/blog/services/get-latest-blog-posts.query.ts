@@ -1,7 +1,7 @@
 import { Query } from '@domeniere/service';
 import { MethodUndefinedException } from '@swindle/core';
 import { BlogPost } from '../aggregates/aggregates.well';
-import { BlogRepositoryException } from '../exceptions/exceptions.well';
+import { BlogPostNotFoundException, BlogRepositoryException } from '../exceptions/exceptions.well';
 import { BlogsRepository } from '../repositories/repositories.well';
 
 /**
@@ -26,12 +26,19 @@ export class GetLatestBlogPostsQuery extends Query {
      * @param count the number of posts to get.
      * @param start the starting index.
      * @returns the list of blog posts.
+     * @throws BlogPostNotFoundException when there are no blog posts to be retrieved.
      * @throws BlogRepositoryException when there is an issue with the repository.
      */
 
     public async execute(count: number, start: number = 0): Promise<BlogPost[]> {
         try {
-            return await this.blogsRepository.getLatest(count, start);
+            const blogs = await this.blogsRepository.getLatest(count, start);
+
+            if (blogs.length == 0) {
+                throw new BlogPostNotFoundException();
+            }
+            
+            return blogs;
         }
         catch(e) {
             throw new BlogRepositoryException((e as Error).message);

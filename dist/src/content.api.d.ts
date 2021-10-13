@@ -1,5 +1,5 @@
+import { DomainEvent } from '@domeniere/event';
 import { Api } from '@domeniere/core';
-import { EventHandlerFailed } from '@domeniere/event';
 import { EmailAddress } from '@swindle/core';
 import { BlogIdData, BlogPostData, BlogsRepository, SearchTextData } from './blog/blog.module';
 import { SendGoodbyeMessageCommand, SendWelcomeMessageCommand } from './communication/communication.module';
@@ -7,13 +7,14 @@ import { ContentEventStore } from './content.eventstore';
 import { ProjectIdData } from './project/data/project-id.data';
 import { ProjectData, ProjectsRepository, TechnologyData } from './project/project.module';
 import { SubscriberCreated, SubscriberDeleted, SubscriberRepository } from './subscriber/subscriber.module';
+import { HandleErrorEventsCommand } from './utilities/utilities.module';
 /**
  * ContentApi
  *
  * The content api.
  */
 export declare class ContentApi extends Api {
-    constructor(blogRepository: BlogsRepository, projectRepository: ProjectsRepository, subscriberRepository: SubscriberRepository, sendWelcomeMessage: SendWelcomeMessageCommand, sendGoodbyeMessage: SendGoodbyeMessageCommand, eventStore: ContentEventStore);
+    constructor(blogRepository: BlogsRepository, projectRepository: ProjectsRepository, subscriberRepository: SubscriberRepository, sendWelcomeMessage: SendWelcomeMessageCommand, sendGoodbyeMessage: SendGoodbyeMessageCommand, handleErrors: HandleErrorEventsCommand, eventStore: ContentEventStore);
     /**
      * createSubscriber()
      *
@@ -41,6 +42,7 @@ export declare class ContentApi extends Api {
      * @param count the number of posts to get.
      * @param start the starting position.
      * @returns the latest posts.
+     * @throws BlogPostNotFoundException when there are no blog posts to retrieve.
      * @throws BlogRepositoryException when there is a problem with the repository.
      */
     getLatestBlogs(count?: number, start?: number): Promise<BlogPostData[]>;
@@ -50,6 +52,7 @@ export declare class ContentApi extends Api {
      * gets the latest projects
      * @param count the number of projects to get.
      * @returns the latest projects.
+     * @throws ProjectNotFoundException when there are no projects to be retrieved
      * @throws ProjectsRepositoryException when there is a problem with the repository.
      */
     getLatestProjects(count?: number): Promise<ProjectData[]>;
@@ -59,6 +62,7 @@ export declare class ContentApi extends Api {
      * gets a project by its id.
      * @param id the id of the project to get.
      * @returns The project associated with the ID.
+     * @throws ProjectIdException when the project id is invalid.
      * @throws ProjectNotFoundException when the project is not found.
      * @throws ProjectsRepositoryException when the repository encounters a problem.
      */
@@ -69,6 +73,7 @@ export declare class ContentApi extends Api {
      * gets projects associated with the specified technology.
      * @param technology the technology to searc for
      * @returns the projects associated with the technology.
+     * @throws ProjectTechnologyException when the technology is invalid.
      * @throws ProjectNotFoundException when there is no projects found for that technology.
      * @throws ProjectsRepositoryException when there is a problem with the repository.
      */
@@ -94,7 +99,7 @@ export declare class ContentApi extends Api {
      * @throws BlogPostNotFoundException when there are no results for the query.
      */
     searchBlogs(query: SearchTextData, count?: number, start?: number): Promise<BlogPostData[]>;
-    logEventHandlerFailed(event: EventHandlerFailed): Promise<void>;
+    handleErrors(event: DomainEvent): Promise<void>;
     sendGoodbyeMessage(event: SubscriberDeleted): Promise<void>;
     sendWelcomeMessage(event: SubscriberCreated): Promise<void>;
 }

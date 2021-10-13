@@ -16,6 +16,7 @@ export declare class GetLatestBlogPostsQuery extends Query {
      * @param count the number of posts to get.
      * @param start the starting index.
      * @returns the list of blog posts.
+     * @throws BlogPostNotFoundException when there are no blog posts to be retrieved.
      * @throws BlogRepositoryException when there is an issue with the repository.
      */
     execute(count: number, start?: number): Promise<BlogPost[]>;

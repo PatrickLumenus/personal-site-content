@@ -10,11 +10,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// The index file
-__exportStar(require("./src/content.api"), exports);
-__exportStar(require("./src/content.eventstore"), exports);
-__exportStar(require("./src/blog/blog.module"), exports);
-__exportStar(require("./src/project/project.module"), exports);
-__exportStar(require("./src/subscriber/subscriber.module"), exports);
-__exportStar(require("./src/communication/communication.module"), exports);
-__exportStar(require("./src/utilities/utilities.module"), exports);
+// services well
+__exportStar(require("./handle-error-events.command"), exports);

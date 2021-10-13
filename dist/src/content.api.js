@@ -30,20 +30,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ContentApi = void 0;
 const common_1 = require("@domeniere/common");
-const core_1 = require("@domeniere/core");
 const event_1 = require("@domeniere/event");
+const core_1 = require("@domeniere/core");
+const event_2 = require("@domeniere/event");
 const blog_module_1 = __importStar(require("./blog/blog.module"));
 const communication_module_1 = __importStar(require("./communication/communication.module"));
 const project_module_1 = __importStar(require("./project/project.module"));
 const get_projects_by_technology_query_1 = require("./project/services/get-projects-by-technology.query");
 const subscriber_module_1 = __importStar(require("./subscriber/subscriber.module"));
+const utilities_module_1 = __importStar(require("./utilities/utilities.module"));
 /**
  * ContentApi
  *
  * The content api.
  */
 class ContentApi extends core_1.Api {
-    constructor(blogRepository, projectRepository, subscriberRepository, sendWelcomeMessage, sendGoodbyeMessage, eventStore) {
+    constructor(blogRepository, projectRepository, subscriberRepository, sendWelcomeMessage, sendGoodbyeMessage, handleErrors, eventStore) {
         super('content', eventStore);
         // Blog module.
         const blogModule = new blog_module_1.default();
@@ -62,6 +64,10 @@ class ContentApi extends core_1.Api {
         communicationModule.registerServiceInstance(communication_module_1.SendWelcomeMessageCommand, sendWelcomeMessage);
         communicationModule.registerServiceInstance(communication_module_1.SendGoodbyeMessageCommand, sendGoodbyeMessage);
         this.registerModule(communicationModule);
+        // utilities module
+        const utilitiesModule = new utilities_module_1.default();
+        utilitiesModule.registerServiceInstance(utilities_module_1.HandleErrorEventsCommand, handleErrors);
+        this.registerModule(utilitiesModule);
     }
     /**
      * createSubscriber()
@@ -102,6 +108,7 @@ class ContentApi extends core_1.Api {
      * @param count the number of posts to get.
      * @param start the starting position.
      * @returns the latest posts.
+     * @throws BlogPostNotFoundException when there are no blog posts to retrieve.
      * @throws BlogRepositoryException when there is a problem with the repository.
      */
     async getLatestBlogs(count = 10, start = 0) {
@@ -117,6 +124,7 @@ class ContentApi extends core_1.Api {
      * gets the latest projects
      * @param count the number of projects to get.
      * @returns the latest projects.
+     * @throws ProjectNotFoundException when there are no projects to be retrieved
      * @throws ProjectsRepositoryException when there is a problem with the repository.
      */
     async getLatestProjects(count = 3) {
@@ -132,6 +140,7 @@ class ContentApi extends core_1.Api {
      * gets a project by its id.
      * @param id the id of the project to get.
      * @returns The project associated with the ID.
+     * @throws ProjectIdException when the project id is invalid.
      * @throws ProjectNotFoundException when the project is not found.
      * @throws ProjectsRepositoryException when the repository encounters a problem.
      */
@@ -149,6 +158,7 @@ class ContentApi extends core_1.Api {
      * gets projects associated with the specified technology.
      * @param technology the technology to searc for
      * @returns the projects associated with the technology.
+     * @throws ProjectTechnologyException when the technology is invalid.
      * @throws ProjectNotFoundException when there is no projects found for that technology.
      * @throws ProjectsRepositoryException when there is a problem with the repository.
      */
@@ -191,8 +201,10 @@ class ContentApi extends core_1.Api {
         return results.map(post => factory.createFromObject(post));
     }
     // event handlers
-    async logEventHandlerFailed(event) {
-        console.log(event.error().message);
+    async handleErrors(event) {
+        await this.domain.module('utilities')
+            .get(utilities_module_1.HandleErrorEventsCommand)
+            .execute(event);
     }
     async sendGoodbyeMessage(event) {
         // send the goodbye message
@@ -208,19 +220,19 @@ class ContentApi extends core_1.Api {
     }
 }
 __decorate([
-    (0, common_1.On)(event_1.EventHandlerFailed),
+    (0, common_1.OnError)(),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [event_1.EventHandlerFailed]),
+    __metadata("design:paramtypes", [event_1.DomainEvent]),
     __metadata("design:returntype", Promise)
-], ContentApi.prototype, "logEventHandlerFailed", null);
+], ContentApi.prototype, "handleErrors", null);
 __decorate([
-    (0, common_1.On)(subscriber_module_1.SubscriberDeleted, event_1.DomainEventHandlerPriority.MEDIUM, "send-goodbye-message"),
+    (0, common_1.On)(subscriber_module_1.SubscriberDeleted, event_2.DomainEventHandlerPriority.MEDIUM, "send-goodbye-message"),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [subscriber_module_1.SubscriberDeleted]),
     __metadata("design:returntype", Promise)
 ], ContentApi.prototype, "sendGoodbyeMessage", null);
 __decorate([
-    (0, common_1.On)(subscriber_module_1.SubscriberCreated, event_1.DomainEventHandlerPriority.MEDIUM, "send-welcome-message"),
+    (0, common_1.On)(subscriber_module_1.SubscriberCreated, event_2.DomainEventHandlerPriority.MEDIUM, "send-welcome-message"),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [subscriber_module_1.SubscriberCreated]),
     __metadata("design:returntype", Promise)
