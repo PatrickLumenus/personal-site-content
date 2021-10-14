@@ -1,4 +1,5 @@
 import { EmailAddress } from "@swindle/core";
+import { SubscriberNameInterface } from "../../values/values.well";
 
 
 export interface SubscriberInterface {
@@ -20,6 +21,14 @@ export interface SubscriberInterface {
     email(): EmailAddress;
 
     /**
+     * name()
+     * 
+     * gets the name of the subscriber.
+     */
+
+    name(): SubscriberNameInterface;
+
+    /**
      * setEmailAddress()
      * 
      * sets the email address.
@@ -27,4 +36,13 @@ export interface SubscriberInterface {
      */
     
     setEmail(email: EmailAddress): void;
+
+    /**
+     * setName()
+     * 
+     * sets the name of the subsriber.
+     * @param newName the name to set.
+     */
+
+    setName(newName: SubscriberNameInterface): void;
 }

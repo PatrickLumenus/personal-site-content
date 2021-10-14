@@ -14,7 +14,7 @@ class SubscriberDataFactory extends factory_1.AbstractFactory {
      * @param object the object to derive from
      */
     createFromObject(object) {
-        return new data_well_1.SubscriberData(object.id().id(), object.email().toString());
+        return new data_well_1.SubscriberData(object.id().id(), object.name().name(), object.email().toString());
     }
 }
 exports.SubscriberDataFactory = SubscriberDataFactory;

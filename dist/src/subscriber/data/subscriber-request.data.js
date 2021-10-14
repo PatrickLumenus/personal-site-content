@@ -1,20 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SubscriberData = void 0;
+exports.SubscriberRequestData = void 0;
 const dto_1 = require("@domeniere/dto");
-class SubscriberData extends dto_1.Data {
-    constructor(id, name, email) {
+class SubscriberRequestData extends dto_1.Data {
+    constructor(name, email) {
         super();
-        this.id = id;
-        this.email = email;
         this.name = name;
+        this.email = email;
     }
     serialize() {
         return JSON.stringify({
-            id: this.id,
             name: this.name,
-            email: this.email
+            email: this.email.toString()
         });
     }
 }
-exports.SubscriberData = SubscriberData;
+exports.SubscriberRequestData = SubscriberRequestData;

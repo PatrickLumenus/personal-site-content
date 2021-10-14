@@ -20,5 +20,5 @@ export abstract class SendWelcomeMessageCommand extends Command {
      * @param email the email to send the message to.
      */
     
-    public abstract execute(email: EmailAddress): Promise<void>;
+    public abstract execute(name: string, email: EmailAddress): Promise<void>;
 }

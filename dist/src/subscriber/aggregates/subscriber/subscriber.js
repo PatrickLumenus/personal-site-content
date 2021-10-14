@@ -37,6 +37,14 @@ class Subscriber extends aggregate_1.TimestampedAggregate {
         }
         return isEquals;
     }
+    /**
+     * name()
+     *
+     * gets the name of the subscriber.
+     */
+    name() {
+        return this.root().name();
+    }
     root() {
         return super.root();
     }
@@ -51,6 +59,16 @@ class Subscriber extends aggregate_1.TimestampedAggregate {
      */
     setEmail(email) {
         this.root().setEmail(email);
+        this.commitStateChanges();
+    }
+    /**
+     * setName()
+     *
+     * sets the name of the subsriber.
+     * @param newName the name to set.
+     */
+    setName(newName) {
+        this.root().setName(newName);
         this.commitStateChanges();
     }
 }

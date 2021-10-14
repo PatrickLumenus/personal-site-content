@@ -11,10 +11,12 @@ import { SubscriberRequestInterface } from './subscriber-request.interface';
  export class SubscriberRequest extends Value implements SubscriberRequestInterface {
 
     private readonly _email: EmailAddress;
+    private readonly _name: string;
 
-    constructor(email: EmailAddress) {
+    constructor(name: string, email: EmailAddress) {
         super();
         this._email = email;
+        this._name = name;
     }
 
      /**
@@ -32,10 +34,20 @@ import { SubscriberRequestInterface } from './subscriber-request.interface';
 
         if (suspect instanceof SubscriberRequest) {
             const other = suspect as SubscriberRequest;
-            isEqual = this.email().equals(other.email());
+            isEqual = (this.email().equals(other.email())) && (this.name() === other.name());
         }
 
         return isEqual;
+    }
+
+    /**
+     * name()
+     * 
+     * gets the name of the subscriber.
+     */
+
+    public name(): string {
+        return this._name;
     }
 
     public serialize(): string {

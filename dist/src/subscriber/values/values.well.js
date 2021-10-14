@@ -15,3 +15,5 @@ __exportStar(require("./subscriber-id/subscriber-id.interface"), exports);
 __exportStar(require("./subscriber-id/subscriber-id"), exports);
 __exportStar(require("./subscriber-request/subscriber-request.interface"), exports);
 __exportStar(require("./subscriber-request/subscriber-request"), exports);
+__exportStar(require("./subscriber-name/subscriber-name.interface"), exports);
+__exportStar(require("./subscriber-name/subscriber-name"), exports);

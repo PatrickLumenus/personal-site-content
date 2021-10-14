@@ -21,5 +21,5 @@ export abstract class SendGoodbyeMessageCommand extends Command {
      * @throws any exception when an error occurs.
      */
 
-    public abstract execute(email: EmailAddress): Promise<void>;
+    public abstract execute(name: string, email: EmailAddress): Promise<void>;
 }

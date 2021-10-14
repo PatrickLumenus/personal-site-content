@@ -1,6 +1,6 @@
 import { Entity } from '@domeniere/entity';
 import { EmailAddress } from '@swindle/core';
-import { SubscriberId } from '../../values/values.well';
+import { SubscriberId, SubscriberName } from '../../values/values.well';
 import { SubscriberProfileInterface } from './subscriber-profile.interface';
 /**
  * SubscriberProfile
@@ -9,7 +9,8 @@ import { SubscriberProfileInterface } from './subscriber-profile.interface';
  */
 export declare class SubscriberProfile extends Entity implements SubscriberProfileInterface {
     private _email;
-    constructor(id: SubscriberId, email: EmailAddress);
+    private _name;
+    constructor(id: SubscriberId, name: SubscriberName, email: EmailAddress);
     /**
      * email()
      *
@@ -17,6 +18,12 @@ export declare class SubscriberProfile extends Entity implements SubscriberProfi
      */
     email(): EmailAddress;
     equals(suspect: any): boolean;
+    /**
+     * name()
+     *
+     * gets the subscriber name.
+     */
+    name(): SubscriberName;
     serializeData(): string;
     /**
      * setEmailAddress()
@@ -25,5 +32,12 @@ export declare class SubscriberProfile extends Entity implements SubscriberProfi
      * @param email the email address to set.
      */
     setEmail(email: EmailAddress): void;
+    /**
+     * setName()
+     *
+     * sets the subscriber name.
+     * @param newName the new name to set.
+     */
+    setName(newName: SubscriberName): void;
 }
 //# sourceMappingURL=subscriber-profile.d.ts.map

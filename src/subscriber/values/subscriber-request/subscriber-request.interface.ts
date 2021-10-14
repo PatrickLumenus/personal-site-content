@@ -10,4 +10,12 @@ export interface SubscriberRequestInterface {
      */
 
     email(): EmailAddress;
+
+    /**
+     * name()
+     * 
+     * gets the name of the subscriber.
+     */
+    
+    name(): string;
 }

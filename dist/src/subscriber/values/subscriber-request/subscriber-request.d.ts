@@ -8,7 +8,8 @@ import { SubscriberRequestInterface } from './subscriber-request.interface';
  */
 export declare class SubscriberRequest extends Value implements SubscriberRequestInterface {
     private readonly _email;
-    constructor(email: EmailAddress);
+    private readonly _name;
+    constructor(name: string, email: EmailAddress);
     /**
      * email()
      *
@@ -16,6 +17,12 @@ export declare class SubscriberRequest extends Value implements SubscriberReques
      */
     email(): EmailAddress;
     equals(suspect: any): boolean;
+    /**
+     * name()
+     *
+     * gets the name of the subscriber.
+     */
+    name(): string;
     serialize(): string;
 }
 //# sourceMappingURL=subscriber-request.d.ts.map

@@ -8,9 +8,10 @@ const value_1 = require("@domeniere/value");
  * A subscriber request
  */
 class SubscriberRequest extends value_1.Value {
-    constructor(email) {
+    constructor(name, email) {
         super();
         this._email = email;
+        this._name = name;
     }
     /**
      * email()
@@ -24,9 +25,17 @@ class SubscriberRequest extends value_1.Value {
         let isEqual = false;
         if (suspect instanceof SubscriberRequest) {
             const other = suspect;
-            isEqual = this.email().equals(other.email());
+            isEqual = (this.email().equals(other.email())) && (this.name() === other.name());
         }
         return isEqual;
+    }
+    /**
+     * name()
+     *
+     * gets the name of the subscriber.
+     */
+    name() {
+        return this._name;
     }
     serialize() {
         return JSON.stringify({

@@ -6,7 +6,7 @@ import { SendGoodbyeMessageCommand, SendWelcomeMessageCommand } from './communic
 import { ContentEventStore } from './content.eventstore';
 import { ProjectIdData } from './project/data/project-id.data';
 import { ProjectData, ProjectsRepository, TechnologyData } from './project/project.module';
-import { SubscriberCreated, SubscriberDeleted, SubscriberRepository } from './subscriber/subscriber.module';
+import { SubscriberCreated, SubscriberDeleted, SubscriberRepository, SubscriberRequestData } from './subscriber/subscriber.module';
 import { HandleErrorEventsCommand } from './utilities/utilities.module';
 /**
  * ContentApi
@@ -23,7 +23,7 @@ export declare class ContentApi extends Api {
      * @throws EmailAlreadyInUseException when the email is already in use.
      * @throws SubscriberRepositoryException when there is a problem with the subscriber repository.
      */
-    createSubscriber(email: EmailAddress): Promise<void>;
+    createSubscriber(request: SubscriberRequestData): Promise<void>;
     /**
      * getBlogPostById()
      *

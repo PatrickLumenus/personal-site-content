@@ -77,11 +77,11 @@ class ContentApi extends core_1.Api {
      * @throws EmailAlreadyInUseException when the email is already in use.
      * @throws SubscriberRepositoryException when there is a problem with the subscriber repository.
      */
-    async createSubscriber(email) {
-        const request = new subscriber_module_1.SubscriberRequest(email);
+    async createSubscriber(request) {
+        const req = new subscriber_module_1.SubscriberRequest(request.name, request.email);
         await this.domain.module('subscriber')
             .get(subscriber_module_1.CreateSubscriberCommand)
-            .execute(request);
+            .execute(req);
     }
     /**
      * getBlogPostById()
@@ -210,13 +210,13 @@ class ContentApi extends core_1.Api {
         // send the goodbye message
         await this.domain.module('communication')
             .get(communication_module_1.SendGoodbyeMessageCommand)
-            .execute(event.subscriber().email());
+            .execute(event.subscriber().name().name(), event.subscriber().email());
     }
     async sendWelcomeMessage(event) {
         // send welcome email.
         await this.domain.module('communication')
             .get(communication_module_1.SendWelcomeMessageCommand)
-            .execute(event.subscriber().email());
+            .execute(event.subscriber().name().name(), event.subscriber().email());
     }
 }
 __decorate([

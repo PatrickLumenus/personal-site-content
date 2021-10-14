@@ -1,7 +1,7 @@
 import { AbstractFactory } from '@domeniere/factory';
 import { Subscriber } from '../../aggregates/aggregates.well';
 import { SubscriberProfile } from '../../entities/entities.well';
-import { SubscriberId, SubscriberRequest } from '../../values/values.well';
+import { SubscriberId, SubscriberName, SubscriberRequest } from '../../values/values.well';
 import { SubscriberFactoryInterface } from './subscriber-factory.interface';
 
 
@@ -20,7 +20,11 @@ export class SubscriberFactory extends AbstractFactory implements SubscriberFact
 
     public createFromRequest(request: SubscriberRequest): Subscriber {
         return new Subscriber(
-            new SubscriberProfile(SubscriberId.Generate(), request.email())
+            new SubscriberProfile(
+                SubscriberId.Generate(), 
+                new SubscriberName(request.name()),
+                request.email()
+            )
         );
     }
 }

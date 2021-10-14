@@ -40,7 +40,8 @@ import SubscriberModule, {
     SubscriberCreated,
     SubscriberDeleted,
     SubscriberRepository,
-    SubscriberRequest, 
+    SubscriberRequest,
+    SubscriberRequestData, 
 } from './subscriber/subscriber.module';
 import UtilitiesModule, { 
     HandleErrorEventsCommand 
@@ -101,11 +102,11 @@ export class ContentApi extends Api {
      * @throws SubscriberRepositoryException when there is a problem with the subscriber repository.
      */
 
-    public async createSubscriber(email: EmailAddress): Promise<void> {
-        const request = new SubscriberRequest(email);
+    public async createSubscriber(request: SubscriberRequestData): Promise<void> {
+        const req = new SubscriberRequest(request.name, request.email);
         await this.domain.module('subscriber')
             .get(CreateSubscriberCommand)
-            .execute(request);
+            .execute(req);
     }
 
     /**
@@ -254,7 +255,7 @@ export class ContentApi extends Api {
         // send the goodbye message
         await this.domain.module('communication')
             .get(SendGoodbyeMessageCommand)
-            .execute(event.subscriber().email());
+            .execute(event.subscriber().name().name(), event.subscriber().email());
     }
 
     @On(SubscriberCreated, DomainEventHandlerPriority.MEDIUM, "send-welcome-message")
@@ -262,6 +263,6 @@ export class ContentApi extends Api {
         // send welcome email.
         await this.domain.module('communication')
             .get(SendWelcomeMessageCommand)
-            .execute(event.subscriber().email());
+            .execute(event.subscriber().name().name(), event.subscriber().email());
     }
 }

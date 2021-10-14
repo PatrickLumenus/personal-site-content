@@ -14,6 +14,6 @@ export declare abstract class SendGoodbyeMessageCommand extends Command {
      * @param email the email address to sned to
      * @throws any exception when an error occurs.
      */
-    abstract execute(email: EmailAddress): Promise<void>;
+    abstract execute(name: string, email: EmailAddress): Promise<void>;
 }
 //# sourceMappingURL=send-goodbye-message.command.d.ts.map

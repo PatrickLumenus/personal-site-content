@@ -16,7 +16,7 @@ class SubscriberFactory extends factory_1.AbstractFactory {
      * @param request the subscriber request to derive from
      */
     createFromRequest(request) {
-        return new aggregates_well_1.Subscriber(new entities_well_1.SubscriberProfile(values_well_1.SubscriberId.Generate(), request.email()));
+        return new aggregates_well_1.Subscriber(new entities_well_1.SubscriberProfile(values_well_1.SubscriberId.Generate(), new values_well_1.SubscriberName(request.name()), request.email()));
     }
 }
 exports.SubscriberFactory = SubscriberFactory;

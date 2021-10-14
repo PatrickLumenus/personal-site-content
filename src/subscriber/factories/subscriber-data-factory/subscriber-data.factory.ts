@@ -18,6 +18,6 @@ export class SubscriberDataFactory extends AbstractFactory implements Subscriber
      */
 
     public createFromObject(object: Subscriber): SubscriberData {
-        return new SubscriberData(object.id().id(), object.email().toString());
+        return new SubscriberData(object.id().id(), object.name().name(), object.email().toString());
     }
 }

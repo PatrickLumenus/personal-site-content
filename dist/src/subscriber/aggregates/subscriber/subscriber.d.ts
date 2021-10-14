@@ -1,7 +1,8 @@
-import { TimestampedAggregate } from '@domeniere/aggregate';
-import { DateTime, EmailAddress } from '@swindle/core';
-import { SubscriberProfile } from '../../entities/entities.well';
-import { SubscriberInterface } from './subscriber.interface';
+import { TimestampedAggregate } from "@domeniere/aggregate";
+import { DateTime, EmailAddress } from "@swindle/core";
+import { SubscriberProfile } from "../../entities/entities.well";
+import { SubscriberName } from "../../values/values.well";
+import { SubscriberInterface } from "./subscriber.interface";
 /**
  * Subscriber
  *
@@ -22,6 +23,12 @@ export declare class Subscriber extends TimestampedAggregate implements Subscrib
      */
     email(): EmailAddress;
     equals(suspect: any): boolean;
+    /**
+     * name()
+     *
+     * gets the name of the subscriber.
+     */
+    name(): SubscriberName;
     protected root(): SubscriberProfile;
     protected serializeData(): string;
     /**
@@ -31,5 +38,12 @@ export declare class Subscriber extends TimestampedAggregate implements Subscrib
      * @param email the email address to set.
      */
     setEmail(email: EmailAddress): void;
+    /**
+     * setName()
+     *
+     * sets the name of the subsriber.
+     * @param newName the name to set.
+     */
+    setName(newName: SubscriberName): void;
 }
 //# sourceMappingURL=subscriber.d.ts.map

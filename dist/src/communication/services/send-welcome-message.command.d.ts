@@ -13,6 +13,6 @@ export declare abstract class SendWelcomeMessageCommand extends Command {
      * executes the operation.
      * @param email the email to send the message to.
      */
-    abstract execute(email: EmailAddress): Promise<void>;
+    abstract execute(name: string, email: EmailAddress): Promise<void>;
 }
 //# sourceMappingURL=send-welcome-message.command.d.ts.map

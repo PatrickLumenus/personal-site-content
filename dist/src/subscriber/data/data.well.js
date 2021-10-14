@@ -12,3 +12,4 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 // dtos well
 __exportStar(require("./subscriber.data"), exports);
+__exportStar(require("./subscriber-request.data"), exports);
