@@ -32,7 +32,12 @@ class GetLatestBlogPostsQuery extends service_1.Query {
             return blogs;
         }
         catch (e) {
-            throw new exceptions_well_1.BlogRepositoryException(e.message);
+            if (e instanceof exceptions_well_1.BlogPostNotFoundException) {
+                throw e;
+            }
+            else {
+                throw new exceptions_well_1.BlogRepositoryException(e.message);
+            }
         }
     }
 }

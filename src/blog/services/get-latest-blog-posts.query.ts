@@ -41,7 +41,12 @@ export class GetLatestBlogPostsQuery extends Query {
             return blogs;
         }
         catch(e) {
-            throw new BlogRepositoryException((e as Error).message);
+            if (e instanceof BlogPostNotFoundException) {
+                throw e;
+            }
+            else {
+                throw new BlogRepositoryException((e as Error).message);
+            }
         }
     }
 }
