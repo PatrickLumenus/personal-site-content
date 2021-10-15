@@ -13,41 +13,41 @@
     "@swindle/core" "^2.1.0"
     typescript "^4.4.2"
 
-"@domeniere/common@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@domeniere/common/-/common-2.0.2.tgz#8400386afb2fec0019375eaff6d0855f87d29e7a"
-  integrity sha512-RAKkZJa/tZNDaH6PnWhqCFYpVK/zzHtcPrK+D6slWI9ia2CYmdHlkGLBSdoZVO0E1wHUV+zsAn5PoktC/NLCcg==
+"@domeniere/common@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@domeniere/common/-/common-2.0.4.tgz#bd0210c64804f85e5c9953c2445d248d3bf858c5"
+  integrity sha512-iqYbigaibEIUQ/1KoD7jJVXpLBmtDvSt40EmkT61bi4YTW6cJxUsyx66ZuDn29HSJbggHLJnyR+lbrGFndITlA==
   dependencies:
-    "@domeniere/core" "^2.0.2"
+    "@domeniere/core" "^2.0.4"
     "@swindle/core" "^2.1.0"
     reflect-metadata "^0.1.13"
     typescript "^4.4.2"
 
-"@domeniere/core@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@domeniere/core/-/core-2.0.2.tgz#a86d19ecc13dacb8842a9f1c187ef3026a01236d"
-  integrity sha512-HGjhHkBVBxfzgWBOKclptFfrdSB/LbkM3aL6dzEjJ1WTUTYItQk76tIR6OQJWgKHZ+BWWwa7L0HizKtCyztEug==
+"@domeniere/core@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@domeniere/core/-/core-2.0.4.tgz#664e7f0b649f5c89a195d53a4d8afc06aafc7a4e"
+  integrity sha512-Aa/AXXSYT9ojh3G+UnKmhXkpsAw5zHxN2bQzKlWdvgc/qvMgD2Gb8axKgyuwsN2XSV1Zhsuym7gds44jZplYwg==
   dependencies:
     "@domeniere/aggregate" "^2.0.1"
-    "@domeniere/domain" "^2.0.1"
+    "@domeniere/domain" "^2.0.2"
     "@domeniere/dto" "^2.0.1"
     "@domeniere/entity" "^2.0.1"
-    "@domeniere/event" "^2.0.1"
+    "@domeniere/event" "^2.0.2"
     "@domeniere/factory" "^2.0.1"
-    "@domeniere/module" "^2.0.1"
+    "@domeniere/module" "^2.0.2"
     "@domeniere/repository" "^2.0.1"
-    "@domeniere/service" "^2.0.1"
+    "@domeniere/service" "^2.0.2"
     "@domeniere/value" "^2.0.2"
     "@swindle/core" "^2.1.0"
     reflect-metadata "^0.1.13"
     typescript "^4.4.2"
 
-"@domeniere/domain@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@domeniere/domain/-/domain-2.0.1.tgz#eaff8653a5b6fa106c3ea2fe4932fd88e7615cfe"
-  integrity sha512-tLEqLasJ/jRlhzubYtB/AEGOewnAVE99CFxRh+rCiinTvXNrrsfnftBw7ZaK3gbxRwJMH+2S01qf+QPl7FDq2w==
+"@domeniere/domain@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@domeniere/domain/-/domain-2.0.2.tgz#2d2c7331eee717b8553e9d859e49fa33079e0dbc"
+  integrity sha512-swkhdP6CT9QVfxrhQB1TSnlJ4/WyiBQTSRUM3l5Oz1D8f2XfBPJAkOEGRjHrIbLOVCHuKVWxfbKkwGEPmQy8bA==
   dependencies:
-    "@domeniere/event" "^2.0.1"
+    "@domeniere/event" "^2.0.2"
     "@swindle/container" "^1.0.1"
     "@swindle/core" "^2.1.0"
     typescript "^4.4.2"
@@ -70,10 +70,10 @@
     "@swindle/core" "^2.1.0"
     typescript "^4.4.2"
 
-"@domeniere/event@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@domeniere/event/-/event-2.0.1.tgz#a35d7212a63092481d5295900507411aaeec9adc"
-  integrity sha512-wl+jWIoMEqCPUsOsxSYqjAnF/WLywd/BocAMWIqSK7R7/6CtvTzyYN9rLkOm298M3dZHN3AnBdbJGUJKTr14OA==
+"@domeniere/event@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@domeniere/event/-/event-2.0.2.tgz#7a78edcd207669ca646c3f50c1fd1c534f280b11"
+  integrity sha512-cbia6W2QxYS82452p9kMGi+RWIn/HcOuXu+HbR3j5ib2Hub+vPK7VEcN1ANraQdTnl5PSbH/p0knx9qhEGa40Q==
   dependencies:
     "@swindle/core" "^2.1.0"
     "@swindle/event-emitter" "^1.0.3"
@@ -87,13 +87,13 @@
   dependencies:
     typescript "^4.4.2"
 
-"@domeniere/module@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@domeniere/module/-/module-2.0.1.tgz#5d86c55e5902978cb49ff6bda11a2d6855f94e2d"
-  integrity sha512-NgU1alY6m3UOeQarOzIXNs6QrDDIHj2KjGkViFJav++2Sg/DcKelqG7jjQM5NHy6IExX0tuqT0yyG34j9aB8xg==
+"@domeniere/module@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@domeniere/module/-/module-2.0.2.tgz#dab74be24fa9fc1fcb1b2552ffd95496f14a7be9"
+  integrity sha512-jV64XD9Asa1pD13EFafiTzuVJSVs2x41V11O+QE706PrH4KLXkQHLYV1uxdJSfx7vW0Wqi/0gq3trLAInRcBGA==
   dependencies:
     "@domeniere/repository" "^2.0.1"
-    "@domeniere/service" "^2.0.1"
+    "@domeniere/service" "^2.0.2"
     "@swindle/container" "^1.0.0"
     "@swindle/core" "^2.1.0"
     typescript "^4.4.2"
@@ -108,12 +108,12 @@
     "@swindle/core" "^2.1.0"
     typescript "^4.4.2"
 
-"@domeniere/service@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@domeniere/service/-/service-2.0.1.tgz#61dba8a61604a99eafb7e7de9e508feaef188944"
-  integrity sha512-+/g2BQcqu4S9z3Y0Qkefe+SRL34kPKd84BgvKOWg79eq2FunokTuXHEtAoO8gerKn5bHzuQvHBN+16THhL5DdA==
+"@domeniere/service@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@domeniere/service/-/service-2.0.2.tgz#d73e87deec48c991ed3f81cd8e152a5fe66b440d"
+  integrity sha512-0tSFLaT2ulwZYFrq2pFnJ0X6g39Uz0+Lmlg4BxpkZhfsjBwInB70AFSCOIEKFuo/Wt94LObxFSznvENeH2LZQw==
   dependencies:
-    "@domeniere/domain" "^2.0.1"
+    "@domeniere/domain" "^2.0.2"
     "@swindle/core" "^2.1.0"
     typescript "^4.4.2"
 
