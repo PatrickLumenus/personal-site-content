@@ -1,4 +1,4 @@
-import { BlogBodyInterface, BlogStatisticsInterface, BlogSummaryInterface, BlogTitleInterface } from "../../values/values.well";
+import { BlogBodyInterface, BlogStatisticsInterface, BlogSummaryInterface, BlogTitleInterface, CoverImageInterface } from "../../values/values.well";
 export interface BlogPostInterface {
     /**
      * body()
@@ -6,6 +6,12 @@ export interface BlogPostInterface {
      * gets the blog body.
      */
     body(): BlogBodyInterface;
+    /**
+     * coverImage()
+     *
+     * gets the cover image.
+     */
+    coverImage(): CoverImageInterface;
     /**
      * incrementBounces()
      *

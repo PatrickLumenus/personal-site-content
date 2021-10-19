@@ -1,7 +1,7 @@
 import { TimestampedAggregate } from '@domeniere/aggregate';
 import { DateTime } from '@swindle/core';
 import { BlogContent } from '../../entities/entities.well';
-import { BlogBody, BlogStatistics, BlogSummary, BlogTitle } from '../../values/values.well';
+import { BlogBody, BlogStatistics, BlogSummary, BlogTitle, CoverImage } from '../../values/values.well';
 import { BlogPostInterface } from './blog-post.interface';
 /**
  * BlogPost
@@ -17,6 +17,12 @@ export declare class BlogPost extends TimestampedAggregate implements BlogPostIn
      * gets the blog body.
      */
     body(): BlogBody;
+    /**
+     * coverImage()
+     *
+     * gets the cover image.
+     */
+    coverImage(): CoverImage;
     equals(suspect: any): boolean;
     /**
      * incrementBounces()

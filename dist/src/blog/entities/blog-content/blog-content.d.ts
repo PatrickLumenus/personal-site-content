@@ -1,5 +1,5 @@
 import { Entity } from '@domeniere/entity';
-import { BlogBody, BlogId, BlogSummary, BlogTitle } from '../../values/values.well';
+import { BlogBody, BlogId, BlogSummary, BlogTitle, CoverImage } from '../../values/values.well';
 import { BlogContentInterface } from './blog-content.interface';
 /**
  * BlogContent
@@ -8,15 +8,22 @@ import { BlogContentInterface } from './blog-content.interface';
  */
 export declare class BlogContent extends Entity implements BlogContentInterface {
     private _body;
+    private _coverImage;
     private _summary;
     private _title;
-    constructor(id: BlogId, title: BlogTitle, body: BlogBody, summary: BlogSummary);
+    constructor(id: BlogId, title: BlogTitle, body: BlogBody, summary: BlogSummary, cover: CoverImage);
     /**
      * body()
      *
      * gets the blog body.
      */
     body(): BlogBody;
+    /**
+     * coverImage()
+     *
+     * gets the cover cover image.
+     */
+    coverImage(): CoverImage;
     equals(suspect: any): boolean;
     serializeData(): string;
     /**

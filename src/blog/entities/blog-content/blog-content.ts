@@ -1,6 +1,6 @@
 import { Entity } from '@domeniere/entity';
 import { State } from '@domeniere/common';
-import { BlogBody, BlogId, BlogSummary, BlogTitle } from '../../values/values.well';
+import { BlogBody, BlogId, BlogSummary, BlogTitle, CoverImage } from '../../values/values.well';
 import { 
     BlogContentInterface,
 } from './blog-content.interface';
@@ -17,6 +17,9 @@ export class BlogContent extends Entity implements BlogContentInterface {
     private _body: BlogBody;
 
     @State()
+    private _coverImage: CoverImage;
+
+    @State()
     private _summary: BlogSummary;
 
     @State()
@@ -27,11 +30,13 @@ export class BlogContent extends Entity implements BlogContentInterface {
         title: BlogTitle,
         body: BlogBody,
         summary: BlogSummary,
+        cover: CoverImage,
     ) {
         super(id);
         this._title = title;
         this._summary = summary;
         this._body = body;
+        this._coverImage = cover;
     }
 
     /**
@@ -42,6 +47,16 @@ export class BlogContent extends Entity implements BlogContentInterface {
 
     public body(): BlogBody {
         return this._body;
+    }
+
+    /**
+     * coverImage()
+     * 
+     * gets the cover cover image.
+     */
+
+    public coverImage(): CoverImage {
+        return this._coverImage;
     }
 
     public equals(suspect: any): boolean {
@@ -60,6 +75,7 @@ export class BlogContent extends Entity implements BlogContentInterface {
             title: this.title().serialize(),
             body: this.body().serialize(),
             summary: this.summary().serialize(),
+            cover: this.coverImage().serialize(),
         });
     }
 

@@ -32,6 +32,14 @@ class BlogPost extends aggregate_1.TimestampedAggregate {
     body() {
         return this.root().body();
     }
+    /**
+     * coverImage()
+     *
+     * gets the cover image.
+     */
+    coverImage() {
+        return this.root().coverImage();
+    }
     equals(suspect) {
         let isEquals = false;
         if (suspect instanceof BlogPost) {

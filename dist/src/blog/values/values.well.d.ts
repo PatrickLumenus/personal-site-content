@@ -8,4 +8,6 @@ export * from "./blog-body/blog-body.interface";
 export * from "./blog-body/blog-body";
 export * from "./blog-statistics/blog-statistics.interface";
 export * from "./blog-statistics/blog-statistics";
+export * from "./cover-image/cover-image.interface";
+export * from "./cover-image/cover-image";
 //# sourceMappingURL=values.well.d.ts.map

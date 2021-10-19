@@ -6,7 +6,8 @@ import {
     BlogBody, 
     BlogStatistics, 
     BlogSummary,
-    BlogTitle
+    BlogTitle,
+    CoverImage
 } from '../../values/values.well';
 import { BlogPostInterface } from './blog-post.interface';
 
@@ -41,6 +42,16 @@ export class BlogPost extends TimestampedAggregate implements BlogPostInterface 
 
     public body(): BlogBody {
         return this.root().body();
+    }
+
+    /**
+     * coverImage()
+     * 
+     * gets the cover image.
+     */
+
+    public coverImage(): CoverImage {
+        return this.root().coverImage();
     }
 
     public equals(suspect: any): boolean {

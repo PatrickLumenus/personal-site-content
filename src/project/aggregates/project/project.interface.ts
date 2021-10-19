@@ -1,5 +1,6 @@
 import { 
     ProjectDescriptionInterface, 
+    ProjectLogoInterface, 
     ProjectRepositoryInterface, 
     ProjectStatisticsInterface, 
     ProjectTitleInterface, 
@@ -44,6 +45,14 @@ export interface ProjectInterface {
      */
 
     incrementViews(amount: number): void;
+
+    /**
+     * logo()
+     * 
+     * gets the project logo
+     */
+    
+    logo(): ProjectLogoInterface;
 
     /**
      * repository()

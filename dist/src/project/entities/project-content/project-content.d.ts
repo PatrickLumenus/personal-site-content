@@ -1,5 +1,5 @@
 import { Entity } from '@domeniere/entity';
-import { ProjectDescription, ProjectId, ProjectRepository, ProjectTitle, ProjectWebsite, Technology } from '../../values/values.well';
+import { ProjectDescription, ProjectId, ProjectLogo, ProjectRepository, ProjectTitle, ProjectWebsite, Technology } from '../../values/values.well';
 import { ProjectContentInterface } from './project-content.interface';
 /**
  * ProjectContent
@@ -12,7 +12,8 @@ export declare class ProjectContent extends Entity implements ProjectContentInte
     private _technologies;
     private _title;
     private _website;
-    constructor(id: ProjectId, title: ProjectTitle, description: ProjectDescription, repository: ProjectRepository, technology?: Technology[], website?: ProjectWebsite | null);
+    private _logo;
+    constructor(id: ProjectId, title: ProjectTitle, description: ProjectDescription, logo: ProjectLogo, repository: ProjectRepository, technology?: Technology[], website?: ProjectWebsite | null);
     /**
      * desctiption()
      *
@@ -21,6 +22,12 @@ export declare class ProjectContent extends Entity implements ProjectContentInte
     description(): ProjectDescription;
     equals(suspect: any): boolean;
     id(): ProjectId;
+    /**
+     * logo()
+     *
+     * gets the project logo.
+     */
+    logo(): ProjectLogo;
     /**
      * repository()
      *

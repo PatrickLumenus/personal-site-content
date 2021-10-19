@@ -19,11 +19,12 @@ const values_well_1 = require("../../values/values.well");
  * The blog content.
  */
 class BlogContent extends entity_1.Entity {
-    constructor(id, title, body, summary) {
+    constructor(id, title, body, summary, cover) {
         super(id);
         this._title = title;
         this._summary = summary;
         this._body = body;
+        this._coverImage = cover;
     }
     /**
      * body()
@@ -32,6 +33,14 @@ class BlogContent extends entity_1.Entity {
      */
     body() {
         return this._body;
+    }
+    /**
+     * coverImage()
+     *
+     * gets the cover cover image.
+     */
+    coverImage() {
+        return this._coverImage;
     }
     equals(suspect) {
         let isEquals = false;
@@ -46,6 +55,7 @@ class BlogContent extends entity_1.Entity {
             title: this.title().serialize(),
             body: this.body().serialize(),
             summary: this.summary().serialize(),
+            cover: this.coverImage().serialize(),
         });
     }
     /**
@@ -69,6 +79,10 @@ __decorate([
     (0, common_1.State)(),
     __metadata("design:type", values_well_1.BlogBody)
 ], BlogContent.prototype, "_body", void 0);
+__decorate([
+    (0, common_1.State)(),
+    __metadata("design:type", values_well_1.CoverImage)
+], BlogContent.prototype, "_coverImage", void 0);
 __decorate([
     (0, common_1.State)(),
     __metadata("design:type", values_well_1.BlogSummary)

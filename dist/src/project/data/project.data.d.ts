@@ -7,7 +7,8 @@ export declare class ProjectData extends Data {
     readonly repository: URL;
     readonly technologies: string[];
     readonly website: URL | null;
-    constructor(id: string, title: string, description: string, short_description: string, repository: URL, technologies?: string[], website?: URL | null);
+    readonly logo: URL | null;
+    constructor(id: string, title: string, description: string, short_description: string, repository: URL, logo?: URL | null, technologies?: string[], website?: URL | null);
     serialize(): string;
 }
 //# sourceMappingURL=project.data.d.ts.map

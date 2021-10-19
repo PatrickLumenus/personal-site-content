@@ -1,5 +1,6 @@
 import { 
     ProjectDescriptionInterface, 
+    ProjectLogoInterface, 
     ProjectRepositoryInterface, 
     ProjectTitleInterface,
     ProjectWebsiteInterface,
@@ -16,6 +17,14 @@ export interface ProjectContentInterface {
      */
 
     description(): ProjectDescriptionInterface;
+
+    /**
+     * logo()
+     * 
+     * gets the project logo.
+     */
+
+    logo(): ProjectLogoInterface;
 
     /**
      * repository()

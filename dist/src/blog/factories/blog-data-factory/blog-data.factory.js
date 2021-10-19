@@ -14,7 +14,7 @@ class BlogDataFactory extends factory_1.AbstractFactory {
      * @param object the object to create from.
      */
     createFromObject(object) {
-        return new data_well_1.BlogPostData(object.id().id(), object.title().value(), object.body().content(), object.summary().value());
+        return new data_well_1.BlogPostData(object.id().id(), object.title().value(), object.body().content(), object.summary().value(), object.coverImage().source());
     }
 }
 exports.BlogDataFactory = BlogDataFactory;

@@ -22,7 +22,8 @@ export class BlogDataFactory extends AbstractFactory implements BlogDataFactoryI
             object.id().id(),
             object.title().value(),
             object.body().content(),
-            object.summary().value()
+            object.summary().value(),
+            object.coverImage().source()
         );
     }
 }

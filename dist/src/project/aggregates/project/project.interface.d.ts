@@ -1,4 +1,4 @@
-import { ProjectDescriptionInterface, ProjectRepositoryInterface, ProjectStatisticsInterface, ProjectTitleInterface, ProjectWebsiteInterface, TechnologyInterface } from "../../values/values.well";
+import { ProjectDescriptionInterface, ProjectLogoInterface, ProjectRepositoryInterface, ProjectStatisticsInterface, ProjectTitleInterface, ProjectWebsiteInterface, TechnologyInterface } from "../../values/values.well";
 export interface ProjectInterface {
     /**
      * desctiption()
@@ -27,6 +27,12 @@ export interface ProjectInterface {
      * @param amount the amount to increment
      */
     incrementViews(amount: number): void;
+    /**
+     * logo()
+     *
+     * gets the project logo
+     */
+    logo(): ProjectLogoInterface;
     /**
      * repository()
      *

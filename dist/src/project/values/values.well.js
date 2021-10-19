@@ -25,3 +25,5 @@ __exportStar(require("./project-statistics/project-statistics.interface"), expor
 __exportStar(require("./project-statistics/project-statistics"), exports);
 __exportStar(require("./technology/technology.interface"), exports);
 __exportStar(require("./technology/technology"), exports);
+__exportStar(require("./project-logo/project-logo.interface"), exports);
+__exportStar(require("./project-logo/project-logo"), exports);

@@ -12,4 +12,6 @@ export * from "./project-statistics/project-statistics.interface";
 export * from "./project-statistics/project-statistics";
 export * from "./technology/technology.interface";
 export * from "./technology/technology";
+export * from "./project-logo/project-logo.interface";
+export * from "./project-logo/project-logo";
 //# sourceMappingURL=values.well.d.ts.map

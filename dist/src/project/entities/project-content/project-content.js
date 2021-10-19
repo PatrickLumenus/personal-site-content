@@ -19,13 +19,14 @@ const values_well_1 = require("../../values/values.well");
  * Project content.
  */
 class ProjectContent extends entity_1.Entity {
-    constructor(id, title, description, repository, technology = [], website = null) {
+    constructor(id, title, description, logo, repository, technology = [], website = null) {
         super(id);
         this._description = description;
         this._repository = repository;
         this._technologies = technology;
         this._title = title;
         this._website = website;
+        this._logo = logo;
     }
     /**
      * desctiption()
@@ -47,6 +48,14 @@ class ProjectContent extends entity_1.Entity {
         return super.id();
     }
     /**
+     * logo()
+     *
+     * gets the project logo.
+     */
+    logo() {
+        return this._logo;
+    }
+    /**
      * repository()
      *
      * gets the project repository.
@@ -59,6 +68,7 @@ class ProjectContent extends entity_1.Entity {
         return JSON.stringify({
             title: this.title().serialize(),
             description: this.description().serialize(),
+            logo: this.logo().serialize(),
             repository: this.repository().serialize(),
             technologies: this.technologies().map(tech => tech.serialize()),
             website: this.website() ? (_a = this.website()) === null || _a === void 0 ? void 0 : _a.serialize() : ""
@@ -109,4 +119,8 @@ __decorate([
     (0, common_1.State)(),
     __metadata("design:type", Object)
 ], ProjectContent.prototype, "_website", void 0);
+__decorate([
+    (0, common_1.State)(),
+    __metadata("design:type", values_well_1.ProjectLogo)
+], ProjectContent.prototype, "_logo", void 0);
 exports.ProjectContent = ProjectContent;

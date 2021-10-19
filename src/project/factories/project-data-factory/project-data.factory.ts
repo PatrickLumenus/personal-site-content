@@ -24,6 +24,7 @@ export class ProjectDataFactory extends AbstractFactory implements ProjectDataFa
             object.description().full(),
             object.description().short(),
             object.repository().url(),
+            object.logo().source(),
             object.technologies().map(tech => tech.serialize()),
             object.website() ? object.website()!.url() : null
         );

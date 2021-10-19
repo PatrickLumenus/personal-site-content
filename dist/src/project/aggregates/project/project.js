@@ -74,6 +74,14 @@ class Project extends aggregate_1.TimestampedAggregate {
         this.commitStateChanges();
     }
     /**
+     * logo()
+     *
+     * gets the project logo
+     */
+    logo() {
+        return this.root().logo();
+    }
+    /**
      * repository()
      *
      * gets the project repository.

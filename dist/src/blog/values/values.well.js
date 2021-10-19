@@ -21,3 +21,5 @@ __exportStar(require("./blog-body/blog-body.interface"), exports);
 __exportStar(require("./blog-body/blog-body"), exports);
 __exportStar(require("./blog-statistics/blog-statistics.interface"), exports);
 __exportStar(require("./blog-statistics/blog-statistics"), exports);
+__exportStar(require("./cover-image/cover-image.interface"), exports);
+__exportStar(require("./cover-image/cover-image"), exports);

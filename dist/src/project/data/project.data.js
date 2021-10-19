@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProjectData = void 0;
 const dto_1 = require("@domeniere/dto");
 class ProjectData extends dto_1.Data {
-    constructor(id, title, description, short_description, repository, technologies = [], website = null) {
+    constructor(id, title, description, short_description, repository, logo = null, technologies = [], website = null) {
         super();
         this.id = id;
         this.title = title;
@@ -12,6 +12,7 @@ class ProjectData extends dto_1.Data {
         this.repository = repository;
         this.technologies = technologies;
         this.website = website;
+        this.logo = logo;
     }
     serialize() {
         return JSON.stringify({
@@ -19,6 +20,7 @@ class ProjectData extends dto_1.Data {
             title: this.title,
             description: this.description,
             short_description: this.short_description,
+            logo: this.logo ? this.logo.toString() : '',
             repository: this.repository.toString(),
             technologies: this.technologies,
             website: this.website ? this.website.toString() : ""

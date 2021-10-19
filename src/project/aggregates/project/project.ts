@@ -6,6 +6,7 @@ import { ProjectContent } from '../../entities/entities.well';
 import { 
     ProjectDescription, 
     ProjectId, 
+    ProjectLogo, 
     ProjectRepository, 
     ProjectStatistics, 
     ProjectTitle,
@@ -97,6 +98,16 @@ export class Project extends TimestampedAggregate implements ProjectInterface {
     public incrementViews(amount: number = 1.0): void {
         this._stats = this.statistics().incrementViews(Math.floor(amount));
         this.commitStateChanges();
+    }
+
+    /**
+     * logo()
+     * 
+     * gets the project logo
+     */
+
+    public logo(): ProjectLogo {
+        return this.root().logo();
     }
 
     /**

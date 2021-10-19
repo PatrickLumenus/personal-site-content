@@ -3,6 +3,7 @@ import { Entity } from '@domeniere/entity';
 import { 
     ProjectDescription, 
     ProjectId, 
+    ProjectLogo, 
     ProjectRepository,
     ProjectTitle,
     ProjectWebsite,
@@ -33,13 +34,17 @@ import { ProjectContentInterface } from './project-content.interface';
     @State()
     private _website: ProjectWebsite|null;
 
+    @State()
+    private _logo: ProjectLogo;
+
     constructor(
         id: ProjectId,
         title: ProjectTitle,
         description: ProjectDescription,
+        logo: ProjectLogo,
         repository: ProjectRepository,
         technology: Technology[] = [],
-        website: ProjectWebsite|null = null
+        website: ProjectWebsite|null = null,
     ) {
         super(id);
         this._description = description;
@@ -47,6 +52,8 @@ import { ProjectContentInterface } from './project-content.interface';
         this._technologies = technology;
         this._title = title;
         this._website = website;
+        this._logo = logo;
+        
     }
 
      /**
@@ -75,6 +82,16 @@ import { ProjectContentInterface } from './project-content.interface';
     }
 
      /**
+      * logo()
+      * 
+      * gets the project logo.
+      */
+
+    public logo(): ProjectLogo {
+        return this._logo;
+    }
+
+     /**
       * repository()
       * 
       * gets the project repository.
@@ -88,6 +105,7 @@ import { ProjectContentInterface } from './project-content.interface';
         return JSON.stringify({
             title: this.title().serialize(),
             description: this.description().serialize(),
+            logo: this.logo().serialize(),
             repository: this.repository().serialize(),
             technologies: this.technologies().map(tech => tech.serialize()),
             website: this.website() ? this.website()?.serialize() : ""
