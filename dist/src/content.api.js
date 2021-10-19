@@ -45,7 +45,7 @@ const utilities_module_1 = __importStar(require("./utilities/utilities.module"))
  * The content api.
  */
 class ContentApi extends core_1.Api {
-    constructor(blogRepository, projectRepository, subscriberRepository, sendWelcomeMessage, sendGoodbyeMessage, handleErrors, eventStore) {
+    constructor(blogRepository, projectRepository, subscriberRepository, sendWelcomeMessage, sendGoodbyeMessage, sendEmailMessage, handleErrors, eventStore) {
         super('content', eventStore);
         // Blog module.
         const blogModule = new blog_module_1.default();
@@ -63,6 +63,7 @@ class ContentApi extends core_1.Api {
         const communicationModule = new communication_module_1.default();
         communicationModule.registerServiceInstance(communication_module_1.SendWelcomeMessageCommand, sendWelcomeMessage);
         communicationModule.registerServiceInstance(communication_module_1.SendGoodbyeMessageCommand, sendGoodbyeMessage);
+        communicationModule.registerServiceInstance(communication_module_1.SendEmailMessageCommand, sendEmailMessage);
         this.registerModule(communicationModule);
         // utilities module
         const utilitiesModule = new utilities_module_1.default();
@@ -181,6 +182,24 @@ class ContentApi extends core_1.Api {
         await this.domain.module('subscriber')
             .get(subscriber_module_1.RemoveSubscriberCommand)
             .execute(email);
+    }
+    /**
+     * sendEmailMessage()
+     *
+     * sends an email message.
+     * @param message the message to sent.
+     * @throws MessageSenderNameException when the message sender name is invlid.
+     * @throws MessageSubjectException when the message subject is invalid.
+     * @throws MessageContentException when the message content is invalid.
+     * @thros FailedToSendMessageException when the message could not be sent.
+     */
+    async sendEmailMessage(message) {
+        const msg = this.domain.module('communication')
+            .get(communication_module_1.EmailMessageFactory)
+            .createFromData(message);
+        await this.domain.module('communication')
+            .get(communication_module_1.SendEmailMessageCommand)
+            .execute(msg);
     }
     /**
      * searchBlogs()

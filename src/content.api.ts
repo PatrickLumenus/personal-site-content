@@ -18,6 +18,9 @@ import BlogModule, {
     SearchTextData
 } from './blog/blog.module';
 import CommunicationModule, { 
+    EmailMessageData,
+    EmailMessageFactory,
+    SendEmailMessageCommand,
     SendGoodbyeMessageCommand,
     SendWelcomeMessageCommand, 
 } from './communication/communication.module';
@@ -61,6 +64,7 @@ export class ContentApi extends Api {
         subscriberRepository: SubscriberRepository,
         sendWelcomeMessage: SendWelcomeMessageCommand,
         sendGoodbyeMessage: SendGoodbyeMessageCommand,
+        sendEmailMessage: SendEmailMessageCommand,
         handleErrors: HandleErrorEventsCommand,
         eventStore: ContentEventStore
     ) {
@@ -85,6 +89,7 @@ export class ContentApi extends Api {
         const communicationModule = new CommunicationModule();
         communicationModule.registerServiceInstance(SendWelcomeMessageCommand, sendWelcomeMessage);
         communicationModule.registerServiceInstance(SendGoodbyeMessageCommand, sendGoodbyeMessage);
+        communicationModule.registerServiceInstance(SendEmailMessageCommand, sendEmailMessage);
         this.registerModule(communicationModule);
 
         // utilities module
@@ -219,6 +224,26 @@ export class ContentApi extends Api {
         await this.domain.module('subscriber')
             .get(RemoveSubscriberCommand)
             .execute(email);
+    }
+
+    /**
+     * sendEmailMessage()
+     * 
+     * sends an email message.
+     * @param message the message to sent.
+     * @throws MessageSenderNameException when the message sender name is invlid.
+     * @throws MessageSubjectException when the message subject is invalid.
+     * @throws MessageContentException when the message content is invalid.
+     * @thros FailedToSendMessageException when the message could not be sent.
+     */
+
+    public async sendEmailMessage(message: EmailMessageData): Promise<void> {
+        const msg = this.domain.module('communication')
+            .get(EmailMessageFactory)
+            .createFromData(message);
+        await this.domain.module('communication')
+            .get(SendEmailMessageCommand)
+            .execute(msg);
     }
 
     /**

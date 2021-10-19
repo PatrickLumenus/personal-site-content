@@ -13,3 +13,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // services well
 __exportStar(require("./send-welcome-message.command"), exports);
 __exportStar(require("./send-goodbye-message.command"), exports);
+__exportStar(require("./send-email-message.command"), exports);

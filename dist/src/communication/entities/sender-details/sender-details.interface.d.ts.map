@@ -1,0 +1,1 @@
+{"version":3,"file":"sender-details.interface.d.ts","sourceRoot":"","sources":["../../../../../src/communication/entities/sender-details/sender-details.interface.ts"],"names":[],"mappings":"AAAA,OAAO,EACH,0BAA0B,EAC1B,uBAAuB,EAC1B,MAAM,0BAA0B,CAAC;AAGlC,MAAM,WAAW,sBAAsB;IAEnC;;;;OAIG;IAEH,IAAI,IAAI,0BAA0B,CAAC;IAEnC;;;;OAIG;IAEH,OAAO,IAAI,uBAAuB,CAAA;CACrC"}

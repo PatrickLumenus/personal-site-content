@@ -1,0 +1,1 @@
+{"version":3,"file":"message-sender-name.exception.d.ts","sourceRoot":"","sources":["../../../../src/communication/exceptions/message-sender-name.exception.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,aAAa,EAAE,MAAM,eAAe,CAAC;AAG7C,qBAAa,0BAA2B,SAAQ,aAAa;gBAE9C,OAAO,GAAE,MAAoC;CAG5D"}

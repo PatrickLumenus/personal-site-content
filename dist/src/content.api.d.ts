@@ -2,7 +2,7 @@ import { DomainEvent } from '@domeniere/event';
 import { Api } from '@domeniere/core';
 import { EmailAddress } from '@swindle/core';
 import { BlogIdData, BlogPostData, BlogsRepository, SearchTextData } from './blog/blog.module';
-import { SendGoodbyeMessageCommand, SendWelcomeMessageCommand } from './communication/communication.module';
+import { EmailMessageData, SendEmailMessageCommand, SendGoodbyeMessageCommand, SendWelcomeMessageCommand } from './communication/communication.module';
 import { ContentEventStore } from './content.eventstore';
 import { ProjectIdData } from './project/data/project-id.data';
 import { ProjectData, ProjectsRepository, TechnologyData } from './project/project.module';
@@ -14,7 +14,7 @@ import { HandleErrorEventsCommand } from './utilities/utilities.module';
  * The content api.
  */
 export declare class ContentApi extends Api {
-    constructor(blogRepository: BlogsRepository, projectRepository: ProjectsRepository, subscriberRepository: SubscriberRepository, sendWelcomeMessage: SendWelcomeMessageCommand, sendGoodbyeMessage: SendGoodbyeMessageCommand, handleErrors: HandleErrorEventsCommand, eventStore: ContentEventStore);
+    constructor(blogRepository: BlogsRepository, projectRepository: ProjectsRepository, subscriberRepository: SubscriberRepository, sendWelcomeMessage: SendWelcomeMessageCommand, sendGoodbyeMessage: SendGoodbyeMessageCommand, sendEmailMessage: SendEmailMessageCommand, handleErrors: HandleErrorEventsCommand, eventStore: ContentEventStore);
     /**
      * createSubscriber()
      *
@@ -87,6 +87,17 @@ export declare class ContentApi extends Api {
      * @throws SubscriberRepositoryException when there is a problem with the subscriber repository.
      */
     removeSubscriber(email: EmailAddress): Promise<void>;
+    /**
+     * sendEmailMessage()
+     *
+     * sends an email message.
+     * @param message the message to sent.
+     * @throws MessageSenderNameException when the message sender name is invlid.
+     * @throws MessageSubjectException when the message subject is invalid.
+     * @throws MessageContentException when the message content is invalid.
+     * @thros FailedToSendMessageException when the message could not be sent.
+     */
+    sendEmailMessage(message: EmailMessageData): Promise<void>;
     /**
      * searchBlogs()
      *

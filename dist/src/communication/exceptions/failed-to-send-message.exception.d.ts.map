@@ -1,0 +1,1 @@
+{"version":3,"file":"failed-to-send-message.exception.d.ts","sourceRoot":"","sources":["../../../../src/communication/exceptions/failed-to-send-message.exception.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,aAAa,EAAE,MAAM,eAAe,CAAC;AAG7C,qBAAa,4BAA6B,SAAQ,aAAa;gBAEhD,OAAO,GAAE,MAAuC;CAG/D"}
