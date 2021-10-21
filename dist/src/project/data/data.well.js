@@ -14,3 +14,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./project.data"), exports);
 __exportStar(require("./project-id.data"), exports);
 __exportStar(require("./technology.data"), exports);
+__exportStar(require("./project-logo.data"), exports);

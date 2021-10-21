@@ -32,7 +32,7 @@ export interface ProjectInterface {
      *
      * gets the project logo
      */
-    logo(): ProjectLogoInterface;
+    logo(): ProjectLogoInterface | null;
     /**
      * repository()
      *

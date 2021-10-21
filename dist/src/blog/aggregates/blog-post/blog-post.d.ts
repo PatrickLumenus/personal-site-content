@@ -22,7 +22,7 @@ export declare class BlogPost extends TimestampedAggregate implements BlogPostIn
      *
      * gets the cover image.
      */
-    coverImage(): CoverImage;
+    coverImage(): CoverImage | null;
     equals(suspect: any): boolean;
     /**
      * incrementBounces()

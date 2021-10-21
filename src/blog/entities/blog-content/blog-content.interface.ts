@@ -22,7 +22,7 @@ export interface BlogContentInterface {
      * gets the cover cover image.
      */
 
-    coverImage(): CoverImageInterface;
+    coverImage(): CoverImageInterface | null;
 
     /**
      * summary()

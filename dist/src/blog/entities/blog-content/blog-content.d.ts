@@ -11,7 +11,7 @@ export declare class BlogContent extends Entity implements BlogContentInterface 
     private _coverImage;
     private _summary;
     private _title;
-    constructor(id: BlogId, title: BlogTitle, body: BlogBody, summary: BlogSummary, cover: CoverImage);
+    constructor(id: BlogId, title: BlogTitle, body: BlogBody, summary: BlogSummary, cover: CoverImage | null);
     /**
      * body()
      *
@@ -23,7 +23,7 @@ export declare class BlogContent extends Entity implements BlogContentInterface 
      *
      * gets the cover cover image.
      */
-    coverImage(): CoverImage;
+    coverImage(): CoverImage | null;
     equals(suspect: any): boolean;
     serializeData(): string;
     /**

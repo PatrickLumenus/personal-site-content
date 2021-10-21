@@ -1,5 +1,5 @@
 import { Data } from '@domeniere/dto';
-import { MethodUndefinedException } from '@swindle/core';
+import { ProjectLogoData } from './project-logo.data';
 
 
 export class ProjectData extends Data {
@@ -11,7 +11,7 @@ export class ProjectData extends Data {
     public readonly repository: URL;
     public readonly technologies: string[];
     public readonly website: URL|null;
-    public readonly logo: URL|null;
+    public readonly logo: ProjectLogoData | null;
 
 
     constructor(
@@ -20,7 +20,7 @@ export class ProjectData extends Data {
         description: string,
         short_description: string,
         repository: URL,
-        logo: URL|null = null,
+        logo: ProjectLogoData | null = null,
         technologies: string[] = [],
         website: URL|null = null,
     ) {

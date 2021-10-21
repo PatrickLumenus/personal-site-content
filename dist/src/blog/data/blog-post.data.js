@@ -17,7 +17,7 @@ class BlogPostData extends dto_1.Data {
             title: this.title,
             content: this.content,
             summary: this.summary,
-            cover: this.cover ? this.cover.toString() : ""
+            cover: this.cover ? this.cover.serialize() : ""
         });
     }
 }

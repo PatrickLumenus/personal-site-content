@@ -1,6 +1,6 @@
 import { AbstractFactory } from '@domeniere/factory';
 import { BlogPost } from '../../aggregates/aggregates.well';
-import { BlogPostData } from '../../data/data.well';
+import { BlogPostData, CoverImageData } from '../../data/data.well';
 import { BlogDataFactoryInterface } from './blog-data-factory.interface';
 
 
@@ -23,7 +23,15 @@ export class BlogDataFactory extends AbstractFactory implements BlogDataFactoryI
             object.title().value(),
             object.body().content(),
             object.summary().value(),
-            object.coverImage().source()
+            object.coverImage() ? 
+            new CoverImageData(
+                object.coverImage()!.source(),
+                object.coverImage()!.description(),
+                object.coverImage()!.contentType(),
+                object.coverImage()!.width(),
+                object.coverImage()!.height(),
+                object.coverImage()!.size(),
+            ) : null,
         );
     }
 }

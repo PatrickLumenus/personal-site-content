@@ -68,7 +68,7 @@ class ProjectContent extends entity_1.Entity {
         return JSON.stringify({
             title: this.title().serialize(),
             description: this.description().serialize(),
-            logo: this.logo().serialize(),
+            logo: this.logo() ? this.logo().serialize() : "",
             repository: this.repository().serialize(),
             technologies: this.technologies().map(tech => tech.serialize()),
             website: this.website() ? (_a = this.website()) === null || _a === void 0 ? void 0 : _a.serialize() : ""
@@ -121,6 +121,6 @@ __decorate([
 ], ProjectContent.prototype, "_website", void 0);
 __decorate([
     (0, common_1.State)(),
-    __metadata("design:type", values_well_1.ProjectLogo)
+    __metadata("design:type", Object)
 ], ProjectContent.prototype, "_logo", void 0);
 exports.ProjectContent = ProjectContent;

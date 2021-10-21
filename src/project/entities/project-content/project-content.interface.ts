@@ -24,7 +24,7 @@ export interface ProjectContentInterface {
      * gets the project logo.
      */
 
-    logo(): ProjectLogoInterface;
+    logo(): ProjectLogoInterface | null;
 
     /**
      * repository()

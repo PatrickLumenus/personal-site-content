@@ -35,13 +35,13 @@ import { ProjectContentInterface } from './project-content.interface';
     private _website: ProjectWebsite|null;
 
     @State()
-    private _logo: ProjectLogo;
+    private _logo: ProjectLogo | null;
 
     constructor(
         id: ProjectId,
         title: ProjectTitle,
         description: ProjectDescription,
-        logo: ProjectLogo,
+        logo: ProjectLogo | null,
         repository: ProjectRepository,
         technology: Technology[] = [],
         website: ProjectWebsite|null = null,
@@ -87,7 +87,7 @@ import { ProjectContentInterface } from './project-content.interface';
       * gets the project logo.
       */
 
-    public logo(): ProjectLogo {
+    public logo(): ProjectLogo | null {
         return this._logo;
     }
 
@@ -105,7 +105,7 @@ import { ProjectContentInterface } from './project-content.interface';
         return JSON.stringify({
             title: this.title().serialize(),
             description: this.description().serialize(),
-            logo: this.logo().serialize(),
+            logo: this.logo() ? this.logo()!.serialize() : "",
             repository: this.repository().serialize(),
             technologies: this.technologies().map(tech => tech.serialize()),
             website: this.website() ? this.website()?.serialize() : ""

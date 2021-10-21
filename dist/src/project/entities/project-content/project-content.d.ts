@@ -13,7 +13,7 @@ export declare class ProjectContent extends Entity implements ProjectContentInte
     private _title;
     private _website;
     private _logo;
-    constructor(id: ProjectId, title: ProjectTitle, description: ProjectDescription, logo: ProjectLogo, repository: ProjectRepository, technology?: Technology[], website?: ProjectWebsite | null);
+    constructor(id: ProjectId, title: ProjectTitle, description: ProjectDescription, logo: ProjectLogo | null, repository: ProjectRepository, technology?: Technology[], website?: ProjectWebsite | null);
     /**
      * desctiption()
      *
@@ -27,7 +27,7 @@ export declare class ProjectContent extends Entity implements ProjectContentInte
      *
      * gets the project logo.
      */
-    logo(): ProjectLogo;
+    logo(): ProjectLogo | null;
     /**
      * repository()
      *

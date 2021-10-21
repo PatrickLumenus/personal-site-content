@@ -1,6 +1,5 @@
 import { TimestampedAggregate } from '@domeniere/aggregate';
 import { State } from '@domeniere/common';
-import { Entity } from '@domeniere/entity';
 import { DateTime } from '@swindle/core';
 import { ProjectContent } from '../../entities/entities.well';
 import { 
@@ -106,7 +105,7 @@ export class Project extends TimestampedAggregate implements ProjectInterface {
      * gets the project logo
      */
 
-    public logo(): ProjectLogo {
+    public logo(): ProjectLogo | null {
         return this.root().logo();
     }
 

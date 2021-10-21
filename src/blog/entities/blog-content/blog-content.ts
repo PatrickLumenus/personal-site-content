@@ -17,7 +17,7 @@ export class BlogContent extends Entity implements BlogContentInterface {
     private _body: BlogBody;
 
     @State()
-    private _coverImage: CoverImage;
+    private _coverImage: CoverImage | null;
 
     @State()
     private _summary: BlogSummary;
@@ -30,7 +30,7 @@ export class BlogContent extends Entity implements BlogContentInterface {
         title: BlogTitle,
         body: BlogBody,
         summary: BlogSummary,
-        cover: CoverImage,
+        cover: CoverImage | null,
     ) {
         super(id);
         this._title = title;
@@ -55,7 +55,7 @@ export class BlogContent extends Entity implements BlogContentInterface {
      * gets the cover cover image.
      */
 
-    public coverImage(): CoverImage {
+    public coverImage(): CoverImage | null {
         return this._coverImage;
     }
 
@@ -75,7 +75,7 @@ export class BlogContent extends Entity implements BlogContentInterface {
             title: this.title().serialize(),
             body: this.body().serialize(),
             summary: this.summary().serialize(),
-            cover: this.coverImage().serialize(),
+            cover: this.coverImage()?.serialize(),
         });
     }
 

@@ -14,3 +14,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./blog-id.data"), exports);
 __exportStar(require("./search-text.data"), exports);
 __exportStar(require("./blog-post.data"), exports);
+__exportStar(require("./cover-image.data"), exports);

@@ -50,7 +50,7 @@ export class BlogPost extends TimestampedAggregate implements BlogPostInterface 
      * gets the cover image.
      */
 
-    public coverImage(): CoverImage {
+    public coverImage(): CoverImage | null {
         return this.root().coverImage();
     }
 

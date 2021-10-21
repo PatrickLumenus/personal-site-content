@@ -1,6 +1,6 @@
 import { AbstractFactory } from '@domeniere/factory';
 import { Project } from '../../aggregates/aggregates.well';
-import { ProjectData } from '../../data/data.well';
+import { ProjectData, ProjectLogoData } from '../../data/data.well';
 import { ProjectDataFactoryInterface } from './project-data-factory.interface';
 
 
@@ -24,7 +24,14 @@ export class ProjectDataFactory extends AbstractFactory implements ProjectDataFa
             object.description().full(),
             object.description().short(),
             object.repository().url(),
-            object.logo().source(),
+            object.logo() ? new ProjectLogoData(
+                object.logo()!.source()!,
+                object.logo()!.description(),
+                object.logo()!.contentType(),
+                object.logo()!.width(),
+                object.logo()!.height(),
+                object.logo()!.size(),
+            ) : null,
             object.technologies().map(tech => tech.serialize()),
             object.website() ? object.website()!.url() : null
         );

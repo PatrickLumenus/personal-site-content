@@ -23,7 +23,7 @@ export interface BlogPostInterface {
      * gets the cover image.
      */
     
-    coverImage(): CoverImageInterface;
+    coverImage(): CoverImageInterface | null;
 
     /**
      * incrementBounces()

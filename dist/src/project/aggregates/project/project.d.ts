@@ -45,7 +45,7 @@ export declare class Project extends TimestampedAggregate implements ProjectInte
      *
      * gets the project logo
      */
-    logo(): ProjectLogo;
+    logo(): ProjectLogo | null;
     /**
      * repository()
      *

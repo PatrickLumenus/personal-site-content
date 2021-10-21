@@ -14,7 +14,7 @@ class ProjectDataFactory extends factory_1.AbstractFactory {
      * @param object the object to derive from
      */
     createFromObject(object) {
-        return new data_well_1.ProjectData(object.id().id(), object.title().title(), object.description().full(), object.description().short(), object.repository().url(), object.logo().source(), object.technologies().map(tech => tech.serialize()), object.website() ? object.website().url() : null);
+        return new data_well_1.ProjectData(object.id().id(), object.title().title(), object.description().full(), object.description().short(), object.repository().url(), object.logo() ? new data_well_1.ProjectLogoData(object.logo().source(), object.logo().description(), object.logo().contentType(), object.logo().width(), object.logo().height(), object.logo().size()) : null, object.technologies().map(tech => tech.serialize()), object.website() ? object.website().url() : null);
     }
 }
 exports.ProjectDataFactory = ProjectDataFactory;

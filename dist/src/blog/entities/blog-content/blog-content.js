@@ -51,11 +51,12 @@ class BlogContent extends entity_1.Entity {
         return isEquals;
     }
     serializeData() {
+        var _a;
         return JSON.stringify({
             title: this.title().serialize(),
             body: this.body().serialize(),
             summary: this.summary().serialize(),
-            cover: this.coverImage().serialize(),
+            cover: (_a = this.coverImage()) === null || _a === void 0 ? void 0 : _a.serialize(),
         });
     }
     /**
@@ -81,7 +82,7 @@ __decorate([
 ], BlogContent.prototype, "_body", void 0);
 __decorate([
     (0, common_1.State)(),
-    __metadata("design:type", values_well_1.CoverImage)
+    __metadata("design:type", Object)
 ], BlogContent.prototype, "_coverImage", void 0);
 __decorate([
     (0, common_1.State)(),
