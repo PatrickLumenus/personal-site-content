@@ -132,8 +132,11 @@ class ContentApi extends core_1.Api {
         const projects = await this.domain.module('project')
             .get(project_module_1.GetLatestProjectsQuery)
             .execute(count);
+        console.log('Back to framework.');
         const factory = this.domain.module('project').get(project_module_1.ProjectDataFactory);
-        return projects.map(project => factory.createFromObject(project));
+        const data = projects.map(project => factory.createFromObject(project));
+        console.log('Exiting framework');
+        return data;
     }
     /**
      * getProjectById()

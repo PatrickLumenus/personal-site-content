@@ -168,8 +168,11 @@ export class ContentApi extends Api {
         const projects = await this.domain.module('project')
             .get(GetLatestProjectsQuery)
             .execute(count);
+        console.log('Back to framework.');
         const factory = this.domain.module('project').get(ProjectDataFactory);
-        return projects.map(project => factory.createFromObject(project));
+        const data = projects.map(project => factory.createFromObject(project));
+        console.log('Exiting framework');
+        return data;
     }
 
     /**
