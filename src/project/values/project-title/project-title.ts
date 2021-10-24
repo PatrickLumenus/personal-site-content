@@ -26,9 +26,11 @@ export class ProjectTitle extends Value implements ProjectTitleInterface {
         super();
 
         if ((value.length >= ProjectTitle.MINIMUM_TITLE_LENGTH) && (value.length <= ProjectTitle.MAXIMUM_TITLE_LENGTH)) {
+            this._title = value;
+        }
+        else {
             throw new ProjectTitleException();
         }
-        this._title = value;
     }
 
     public equals(suspect: any): boolean {

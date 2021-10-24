@@ -17,9 +17,11 @@ class ProjectTitle extends value_1.Value {
     constructor(value) {
         super();
         if ((value.length >= ProjectTitle.MINIMUM_TITLE_LENGTH) && (value.length <= ProjectTitle.MAXIMUM_TITLE_LENGTH)) {
+            this._title = value;
+        }
+        else {
             throw new exceptions_well_1.ProjectTitleException();
         }
-        this._title = value;
     }
     equals(suspect) {
         let isEqual = false;
