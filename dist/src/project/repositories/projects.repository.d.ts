@@ -24,9 +24,10 @@ export declare abstract class ProjectsRepository extends Repository {
      *
      * gets the latest projects.
      * @param count the number of projects to return.
+     * @param offset the offset to skip.
      * @throws any exception when there is an error.
      */
-    abstract getLatestProjects(count: number): Promise<Project[]>;
+    abstract getLatestProjects(count: number, offset: number): Promise<Project[]>;
     /**
      * remove()
      *

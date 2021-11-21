@@ -18,6 +18,6 @@ export declare class GetLatestProjectsQuery extends Query {
      * @throws ProjectsRepositoryException when there is an issue with the repository.
      * @throws ProjectNotFoundException when the projects cannot be found.
      */
-    execute(count: number): Promise<Project[]>;
+    execute(count: number, offset: number): Promise<Project[]>;
 }
 //# sourceMappingURL=get-latest-projects.query.d.ts.map

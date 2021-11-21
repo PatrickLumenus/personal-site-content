@@ -51,11 +51,12 @@ export declare class ContentApi extends Api {
      *
      * gets the latest projects
      * @param count the number of projects to get.
+     * @param offset the offset, or number of items to skip.
      * @returns the latest projects.
      * @throws ProjectNotFoundException when there are no projects to be retrieved
      * @throws ProjectsRepositoryException when there is a problem with the repository.
      */
-    getLatestProjects(count?: number): Promise<ProjectData[]>;
+    getLatestProjects(count?: number, offset?: number): Promise<ProjectData[]>;
     /**
      * getProjectById()
      *

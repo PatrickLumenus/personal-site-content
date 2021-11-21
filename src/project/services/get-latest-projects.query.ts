@@ -28,9 +28,9 @@ export class GetLatestProjectsQuery extends Query {
      * @throws ProjectNotFoundException when the projects cannot be found.
      */
 
-    public async execute(count: number): Promise<Project[]> {
+    public async execute(count: number, offset: number): Promise<Project[]> {
         try {
-            const projects = await this.projectsRepository.getLatestProjects(count);
+            const projects = await this.projectsRepository.getLatestProjects(count, offset);
 
             if (projects.length === 0) {
                 throw new ProjectNotFoundException();

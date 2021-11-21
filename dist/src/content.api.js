@@ -124,14 +124,15 @@ class ContentApi extends core_1.Api {
      *
      * gets the latest projects
      * @param count the number of projects to get.
+     * @param offset the offset, or number of items to skip.
      * @returns the latest projects.
      * @throws ProjectNotFoundException when there are no projects to be retrieved
      * @throws ProjectsRepositoryException when there is a problem with the repository.
      */
-    async getLatestProjects(count = 3) {
+    async getLatestProjects(count = 3, offset = 0) {
         const projects = await this.domain.module('project')
             .get(project_module_1.GetLatestProjectsQuery)
-            .execute(count);
+            .execute(count, offset);
         const factory = this.domain.module('project').get(project_module_1.ProjectDataFactory);
         const data = projects.map(project => factory.createFromObject(project));
         return data;
