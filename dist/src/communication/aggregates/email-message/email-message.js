@@ -60,7 +60,9 @@ class EmailMessage extends aggregate_1.TimestampedAggregate {
         return super.root();
     }
     serializeData() {
-        throw new core_1.MethodUndefinedException();
+        return JSON.stringify({
+            content: this.content().serialize()
+        });
     }
     /**
      * subject()

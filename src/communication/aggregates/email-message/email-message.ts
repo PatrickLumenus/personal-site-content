@@ -1,7 +1,6 @@
 import { TimestampedAggregate } from '@domeniere/aggregate';
 import { State } from '@domeniere/common';
-import { Entity } from '@domeniere/entity';
-import { DateTime, EmailAddress, MethodUndefinedException } from '@swindle/core';
+import { DateTime, EmailAddress } from '@swindle/core';
 import { SenderDetails } from '../../entities/entities.well';
 import { MessageContent, MessageSenderName, MessageSubject } from '../../values/values.well';
 import { EmailMessageInterface } from './email-message.interface';
@@ -76,7 +75,9 @@ export class EmailMessage extends TimestampedAggregate implements EmailMessageIn
     }
 
     protected serializeData(): string {
-        throw new MethodUndefinedException();
+        return JSON.stringify({
+            content: this.content().serialize()
+        });
     }
 
     /**
